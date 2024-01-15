@@ -6,7 +6,7 @@ using DMGSimpleUI.DMG.Models;
 
 namespace DMGSimpleUI.DMG.Samples;
 
-public class MainMenuSample
+public class MainMenuSample : DMGScene
 {
     public static Action QuitGame;
 
@@ -51,7 +51,7 @@ public class MainMenuSample
         QuitGame?.Invoke();
     }
 
-    public void Update()
+    public override void Update()
     {
         foreach (var item in _elements)
         {
@@ -59,7 +59,7 @@ public class MainMenuSample
         }
     }
 
-    public void Draw()
+    public override void Draw()
     {
         foreach (var item in _elements)
         {
