@@ -74,6 +74,7 @@ public class UIManager
         MainMenuSample.ScreenTransition += OnScreenTransition;
          
         AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
+        SetResolution(DMGUIGlobals.Bounds.X,DMGUIGlobals.Bounds.Y);
     }
     
     private void SetResolution(int height, int width)
@@ -139,16 +140,6 @@ public class UIManager
 
     public void Draw()
     {
-        // _dmgCanvas.Activate();
-        // DMGUIGlobals.SpriteBatch.Begin();
-        // _dmgCanvas.Draw(DMGUIGlobals.SpriteBatch);
-        // _drawActiveUi();
-        // DMGUIGlobals.SpriteBatch.DrawString(Font, $"Mouse: {DMGUIGlobals.MouseCursor.X} , {DMGUIGlobals.MouseCursor.Y}", new Vector2(DMGUIGlobals.Bounds.X - 150,DMGUIGlobals.Bounds.Y - 25), Color.AntiqueWhite);
-        // DMGUIGlobals.SpriteBatch.DrawString(Font, infoMessage.message, new Vector2( 150, DMGUIGlobals.Bounds.Y - 25), infoMessage.color);
-        //
-        // DMGUIGlobals.SpriteBatch.End();
-       
-        
         _dmgCanvas.Activate();
         DMGUIGlobals.SpriteBatch.Begin();
         {
