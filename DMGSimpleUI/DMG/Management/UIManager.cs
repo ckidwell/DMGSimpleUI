@@ -13,25 +13,24 @@ public class UIManager
     private readonly List<BaseUIElement> _elements = new();
     
     private UIAlertMessage infoMessage = new UIAlertMessage{message = String.Empty, color = Color.White };
-
+   
     private Dictionary<int, UIAlertMessage> UIAlertMessages = new Dictionary<int, UIAlertMessage>();
     private int messageCount = 0;
     
     // UI Samples
     private MenuBarSample _menuBarSample;
     private MainMenuSample _mainMenuSample;
+    private SampleSceneNavigator _sampleSceneNavigator = new SampleSceneNavigator();
     
     // Delegate for active UI 
     private delegate void DrawActiveUI();
-
     private DrawActiveUI _drawActiveUi;
-
     private delegate void UpdateActiveUI();
-
     private UpdateActiveUI _updateActiveUi;
+    
     private Game _game;
     private DMGUITheme _theme;
-    
+
     public UIManager(Game game, DMGUITheme theme)
     {
         _game = game;
@@ -52,8 +51,14 @@ public class UIManager
         
         MenuBarSample.QuitGame += OnQuitGame;
         MainMenuSample.QuitGame += OnQuitGame;
+        MainMenuSample.ScreenTransition += OnScreenTransition;
          
         AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
+    }
+
+    private void OnScreenTransition(DMGTransition transition)
+    {
+        _sampleSceneNavigator.InitializeTransition(transition, _mainMenuSample, _menuBarSample);
     }
 
     private void OnQuitGame()
@@ -83,9 +88,12 @@ public class UIManager
         return e;
     }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         _updateActiveUi();
+        
+        if(_sampleSceneNavigator.TransitionActive())
+            _sampleSceneNavigator.Update(gameTime);
     }
 
     public void Draw()

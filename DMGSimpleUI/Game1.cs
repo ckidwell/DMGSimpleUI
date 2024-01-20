@@ -53,7 +53,7 @@ public class Game1 : Game
             Exit();
 
         DMGUIGlobals.Update(gameTime);
-        _uiManager.Update();
+        _uiManager.Update(gameTime);
         
         base.Update(gameTime);
     }

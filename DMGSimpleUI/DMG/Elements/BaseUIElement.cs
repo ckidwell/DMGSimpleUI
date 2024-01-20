@@ -11,7 +11,7 @@ public class BaseUIElement
     protected Vector2 _position;
     protected Rectangle _rect;
     protected Color _shade = Color.White;
-    protected Color _color;
+    public Color _color;
     protected SpriteFont _font;
     protected Vector2 _origin;
     protected int leftTextPadding;
