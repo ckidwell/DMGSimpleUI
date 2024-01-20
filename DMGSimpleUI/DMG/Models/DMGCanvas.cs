@@ -34,15 +34,15 @@ public class DMGCanvas
     public void Activate()
     {
         _graphicsDevice.SetRenderTarget(_target);
-        _graphicsDevice.Clear(Color.DarkGray);
+        _graphicsDevice.Clear(Color.MonoGameOrange);
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        _graphicsDevice.SetRenderTarget(null);
-        _graphicsDevice.Clear(Color.Black);
-        spriteBatch.Begin();
+        // _graphicsDevice.SetRenderTarget(null);
+        // _graphicsDevice.Clear(Color.Black);
+        //spriteBatch.Begin();
         spriteBatch.Draw(_target, _destinationRectangle, Color.White);
-        spriteBatch.End();
+        //spriteBatch.End();
     }
 }

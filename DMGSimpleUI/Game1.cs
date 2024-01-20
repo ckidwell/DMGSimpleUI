@@ -24,13 +24,12 @@ public class Game1 : Game
  
     protected override void Initialize()
     {
-        DMGUIGlobals.Bounds = new(1280, 720);
         DMGUIGlobals.Content = Content;
         
-        _graphics.PreferredBackBufferWidth = DMGUIGlobals.Bounds.X;
-        _graphics.PreferredBackBufferHeight =  DMGUIGlobals.Bounds.Y;
+        _theme = SampleThemes.GetFireTheme();
+        _uiManager = new UIManager(this,_graphics,_theme);
         
-        _graphics.ApplyChanges();
+        //_graphics.ApplyChanges();
 
         base.Initialize();
     }
@@ -38,12 +37,7 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-
         DMGUIGlobals.SpriteBatch = _spriteBatch;
-        
-        _theme = SampleThemes.GetFireTheme();
-        _uiManager = new UIManager(this,_theme);
-
     }
 
     protected override void Update(GameTime gameTime)
@@ -60,13 +54,14 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(_theme.backgroundColor);
+        _uiManager.Draw();
+        //GraphicsDevice.Clear(_theme.backgroundColor);
 
-       _spriteBatch.Begin();
-       {
-           _uiManager.Draw();
-       }
-       _spriteBatch.End();
+       // _spriteBatch.Begin();
+       // {
+       //     _uiManager.Draw();
+       // }
+       // _spriteBatch.End();
 
         base.Draw(gameTime);
     }

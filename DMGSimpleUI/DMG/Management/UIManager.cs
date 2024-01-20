@@ -30,24 +30,44 @@ public class UIManager
     
     private Game _game;
     private DMGUITheme _theme;
+    
+    // Render Target items
+    private readonly DMGCanvas _dmgCanvas;
+    private readonly GraphicsDeviceManager _graphics;
 
-    public UIManager(Game game, DMGUITheme theme)
+    public UIManager(Game game, GraphicsDeviceManager graphics, DMGUITheme theme)
     {
         _game = game;
         _theme = theme;
+        _graphics = graphics;
         
+        DMGUIGlobals.Bounds = new(1280, 720);
+        
+        _dmgCanvas = new(_graphics.GraphicsDevice,
+            DMGUIGlobals.Bounds.X,
+            DMGUIGlobals.Bounds.Y);
+        
+        _graphics.PreferredBackBufferWidth = DMGUIGlobals.Bounds.X;
+        _graphics.PreferredBackBufferHeight =  DMGUIGlobals.Bounds.Y;
+        
+        _graphics.ApplyChanges();
         ButtonTexture = DMGUIGlobals.Content.Load<Texture2D>("whitebutton128x32");
         Font = DMGUIGlobals.Content.Load<SpriteFont>("KarenFat");
         DMGUIGlobals.UIFont = GetUISpriteFont();
 
+        SampleItemsInit();
+    }
+
+    private void SampleItemsInit()
+    {
         _menuBarSample = new MenuBarSample(_theme);
         _mainMenuSample = new MainMenuSample(_theme);
 
-         _drawActiveUi = _mainMenuSample.Draw;
-         _updateActiveUi = _mainMenuSample.Update;
+        _drawActiveUi = _mainMenuSample.Draw;
+        _updateActiveUi = _mainMenuSample.Update;
          
-         // _drawActiveUi = _menuBarSample.Draw;
-         // _updateActiveUi = _menuBarSample.Update;
+        // _drawActiveUi = _menuBarSample.Draw;
+        // _updateActiveUi = _menuBarSample.Update;
         
         MenuBarSample.QuitGame += OnQuitGame;
         MainMenuSample.QuitGame += OnQuitGame;
@@ -55,7 +75,23 @@ public class UIManager
          
         AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
     }
-
+    
+    private void SetResolution(int height, int width)
+    {
+        _graphics.PreferredBackBufferWidth = height;
+        _graphics.PreferredBackBufferHeight = width;
+        _game.Window.IsBorderless = false;
+        _graphics.ApplyChanges();
+        _dmgCanvas.SetDestinationRectangle();
+    }
+    private void SetFullScreen()
+    {
+        _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+        _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+        _game.Window.IsBorderless = true;
+        _graphics.ApplyChanges();
+        _dmgCanvas.SetDestinationRectangle();
+    }
     private void OnScreenTransition(DMGTransition transition)
     {
         _sampleSceneNavigator.InitializeTransition(transition, _mainMenuSample, _menuBarSample);
@@ -90,6 +126,11 @@ public class UIManager
 
     public void Update(GameTime gameTime)
     {
+        if (DMGUIGlobals.IsKeyPressed(Keys.F1)) SetResolution(1280, 720);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F2)) SetResolution(1920, 1080);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F3)) SetResolution(640, 1080);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F4)) SetFullScreen();
+        
         _updateActiveUi();
         
         if(_sampleSceneNavigator.TransitionActive())
@@ -98,9 +139,29 @@ public class UIManager
 
     public void Draw()
     {
-        _drawActiveUi();
+        // _dmgCanvas.Activate();
+        // DMGUIGlobals.SpriteBatch.Begin();
+        // _dmgCanvas.Draw(DMGUIGlobals.SpriteBatch);
+        // _drawActiveUi();
+        // DMGUIGlobals.SpriteBatch.DrawString(Font, $"Mouse: {DMGUIGlobals.MouseCursor.X} , {DMGUIGlobals.MouseCursor.Y}", new Vector2(DMGUIGlobals.Bounds.X - 150,DMGUIGlobals.Bounds.Y - 25), Color.AntiqueWhite);
+        // DMGUIGlobals.SpriteBatch.DrawString(Font, infoMessage.message, new Vector2( 150, DMGUIGlobals.Bounds.Y - 25), infoMessage.color);
+        //
+        // DMGUIGlobals.SpriteBatch.End();
+       
         
-        DMGUIGlobals.SpriteBatch.DrawString(Font, $"Mouse: {DMGUIGlobals.MouseCursor.X} , {DMGUIGlobals.MouseCursor.Y}", new Vector2(DMGUIGlobals.Bounds.X - 150,DMGUIGlobals.Bounds.Y - 25), Color.AntiqueWhite);
-        DMGUIGlobals.SpriteBatch.DrawString(Font, infoMessage.message, new Vector2( 150, DMGUIGlobals.Bounds.Y - 25), infoMessage.color);
+        _dmgCanvas.Activate();
+        DMGUIGlobals.SpriteBatch.Begin();
+        {
+            _drawActiveUi();
+            DMGUIGlobals.SpriteBatch.DrawString(Font, $"Mouse: {DMGUIGlobals.MouseCursor.X} , {DMGUIGlobals.MouseCursor.Y}", new Vector2(DMGUIGlobals.Bounds.X - 150,DMGUIGlobals.Bounds.Y - 25), Color.AntiqueWhite);
+            DMGUIGlobals.SpriteBatch.DrawString(Font, infoMessage.message, new Vector2( 150, DMGUIGlobals.Bounds.Y - 25), infoMessage.color);     
+        }
+        DMGUIGlobals.SpriteBatch.End();
+        
+        _graphics.GraphicsDevice.SetRenderTarget(null);
+        _graphics.GraphicsDevice.Clear(Color.Black);
+        DMGUIGlobals.SpriteBatch.Begin();
+        _dmgCanvas.Draw(DMGUIGlobals.SpriteBatch);
+        DMGUIGlobals.SpriteBatch.End();
     }
 }

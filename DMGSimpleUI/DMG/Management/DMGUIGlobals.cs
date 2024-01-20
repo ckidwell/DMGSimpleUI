@@ -12,6 +12,8 @@ public class DMGUIGlobals
     public static GraphicsDevice GraphicsDevice { get; set; }
     public static MouseState MouseState;
     public static MouseState LastMouseState;
+    private static KeyboardState _lastKeyboard;
+    private static KeyboardState _currentKeyboard;
     
     public static bool Clicked { get; set; }
     public static bool BeginDrag { get; set; }
@@ -27,5 +29,11 @@ public class DMGUIGlobals
         Clicked = (MouseState.LeftButton == ButtonState.Pressed) &&
                   (LastMouseState.LeftButton == ButtonState.Released);
         MouseCursor = new Rectangle(MouseState.Position, new Point(1, 1));
+        _lastKeyboard = _currentKeyboard;
+        _currentKeyboard = Keyboard.GetState();
+    }
+    public static bool IsKeyPressed(Keys key)
+    {
+        return _currentKeyboard.IsKeyDown(key) && _lastKeyboard.IsKeyUp(key);
     }
 }
