@@ -27,9 +27,9 @@ public class DMGButton: BaseUIElement
         _interactable = true;
     
         // ReSharper disable once PossibleLossOfFraction
-        screenWidthAdjustment = DMGUIGlobals.Bounds.X / 2 - t.Width ;
+        //screenWidthAdjustment = DMGUIGlobals.Bounds.X / 2 - t.Width ;
         // ReSharper disable once PossibleLossOfFraction
-        screenHeightAdjustment = DMGUIGlobals.Bounds.Y / 2 - (t.Height * 4.2);
+        //screenHeightAdjustment = DMGUIGlobals.Bounds.Y / 2 - (t.Height * 4.2);
         
         leftTextPadding = (int) (t.Width * .1);
         topleftTextPadding = (int) (t.Height *.34 );
@@ -48,9 +48,9 @@ public class DMGButton: BaseUIElement
         _interactable = true;
     
         // ReSharper disable once PossibleLossOfFraction
-        screenWidthAdjustment = DMGUIGlobals.Bounds.X / 2 - t.Width ;
+        //screenWidthAdjustment = DMGUIGlobals.Bounds.X / 2 - t.Width ;
         // ReSharper disable once PossibleLossOfFraction
-        screenHeightAdjustment = DMGUIGlobals.Bounds.Y / 2 - (t.Height * 4.2);
+        //screenHeightAdjustment = DMGUIGlobals.Bounds.Y / 2 - (t.Height * 4.2);
         
         leftTextPadding = (int) (t.Width * .1);
         topleftTextPadding = (int) (t.Height *.34 );
@@ -77,6 +77,7 @@ public class DMGButton: BaseUIElement
     public override void Update()
     {
         //if (!_interactable) return;
+       
         foreach (var e in _children)
         {
             e.Update();
@@ -94,6 +95,8 @@ public class DMGButton: BaseUIElement
         }
     }
 
+    
+    
     protected override void Click()
     {
         OnClick?.Invoke(this, EventArgs.Empty);

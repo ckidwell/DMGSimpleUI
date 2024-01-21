@@ -6,7 +6,7 @@ using DMGSimpleUI.DMG.Models;
 
 namespace DMGSimpleUI.DMG.Samples;
 
-public class MenuBarSample
+public class MenuBarSample : DMGScene
 {
     public static Action QuitGame;
     private readonly List<BaseUIElement> _elements = new();
@@ -56,7 +56,7 @@ public class MenuBarSample
     }
 
     
-    public void Update()
+    public override void Update()
     {
         foreach (var item in _elements)
         {
@@ -64,7 +64,7 @@ public class MenuBarSample
         }
     }
 
-    public void Draw()
+    public override void Draw()
     {
         foreach (var item in _elements)
         {
