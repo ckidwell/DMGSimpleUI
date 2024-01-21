@@ -31,6 +31,9 @@ public class UIManager
     private Game _game;
     private DMGUITheme _theme;
     
+    //scene transition
+    private bool transitionInProgress = false;
+    
     // Render Target items
     private readonly DMGCanvas _dmgCanvas;
     private readonly GraphicsDeviceManager _graphics;
@@ -118,11 +121,7 @@ public class UIManager
         // CursorScaling = new Vector2(_dmgCanvas.GetRenderTarget().Width / (float) GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
         //     _dmgCanvas.GetRenderTarget().Height / (float) GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
     }
-    private void OnScreenTransition(DMGTransition transition)
-    {
-        _sampleSceneNavigator.InitializeTransition(transition, _mainMenuSample, _menuBarSample);
-    }
-
+  
     private void OnQuitGame()
     {
         _game.Exit();
@@ -130,7 +129,12 @@ public class UIManager
 
     public void ProcessInput()
     {
-        
+        if (DMGUIGlobals.IsKeyPressed(Keys.F1)) SetResolution(1280, 720);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F2)) SetResolution(1920, 1080);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F3)) SetResolution(1400, 900);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F4)) SetResolution(800, 1280);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F5)) SetResolution(1800, 480);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F6)) SetFullScreen();
     }
     public void AddUIAlertMessage(string m, Color c)
     {
@@ -149,20 +153,32 @@ public class UIManager
 
         return e;
     }
+    private void OnScreenTransition(DMGTransition transition)
+    {
+        _sampleSceneNavigator.InitializeTransition(transition, _mainMenuSample, _menuBarSample);
+        transitionInProgress = true;
+    }
 
     public void Update(GameTime gameTime)
     {
-        if (DMGUIGlobals.IsKeyPressed(Keys.F1)) SetResolution(1280, 720);
-        if (DMGUIGlobals.IsKeyPressed(Keys.F2)) SetResolution(1920, 1080);
-        if (DMGUIGlobals.IsKeyPressed(Keys.F3)) SetResolution(1400, 900);
-        if (DMGUIGlobals.IsKeyPressed(Keys.F4)) SetResolution(800, 1280);
-        if (DMGUIGlobals.IsKeyPressed(Keys.F5)) SetResolution(1800, 480);
-        if (DMGUIGlobals.IsKeyPressed(Keys.F6)) SetFullScreen();
+        ProcessInput();
         
         _updateActiveUi();
-        
-        if(_sampleSceneNavigator.TransitionActive())
+
+        if (!transitionInProgress) return;
+
+        if (_sampleSceneNavigator.TransitionActive())
+        {
             _sampleSceneNavigator.Update(gameTime);
+        }
+        else
+        {
+            var nextScene = _sampleSceneNavigator.NextScene();
+            _drawActiveUi = nextScene.Draw;
+            _updateActiveUi = nextScene.Update;
+            transitionInProgress = false;
+        }
+
     }
 
     public void Draw()
