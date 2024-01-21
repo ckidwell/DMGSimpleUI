@@ -34,6 +34,7 @@ public class UIManager
     // Render Target items
     private readonly DMGCanvas _dmgCanvas;
     private readonly GraphicsDeviceManager _graphics;
+    public static Vector2 CursorScaling { get; set; } 
 
     public UIManager(Game game, GraphicsDeviceManager graphics, DMGUITheme theme)
     {
@@ -74,7 +75,8 @@ public class UIManager
         MainMenuSample.ScreenTransition += OnScreenTransition;
          
         AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
-        SetResolution(DMGUIGlobals.Bounds.X,DMGUIGlobals.Bounds.Y);
+        //SetResolution(DMGUIGlobals.Bounds.X,DMGUIGlobals.Bounds.Y);
+        SetResolution(480,360);
     }
     
     private void SetResolution(int height, int width)
@@ -84,6 +86,7 @@ public class UIManager
         _game.Window.IsBorderless = false;
         _graphics.ApplyChanges();
         _dmgCanvas.SetDestinationRectangle();
+        UpdateCursorScaling();
     }
     private void SetFullScreen()
     {
@@ -92,6 +95,24 @@ public class UIManager
         _game.Window.IsBorderless = true;
         _graphics.ApplyChanges();
         _dmgCanvas.SetDestinationRectangle();
+    }
+    private void UpdateCursorScaling()
+    {
+
+        var r_target_width = _dmgCanvas.GetRenderTarget().Width;
+        var display_mode_width = (float) _graphics.PreferredBackBufferWidth; //GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width; <- is this for fullscreen?
+
+        var divided_width = r_target_width / display_mode_width;
+        
+        var r_target_height = _dmgCanvas.GetRenderTarget().Height;
+        var display_mode_height = (float) _graphics.PreferredBackBufferHeight; //GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; <- is this for fullscreen?
+        
+        var divided_height = r_target_height / display_mode_height;
+
+        CursorScaling = new Vector2(divided_width, divided_height);
+        
+        // CursorScaling = new Vector2(_dmgCanvas.GetRenderTarget().Width / (float) GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+        //     _dmgCanvas.GetRenderTarget().Height / (float) GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
     }
     private void OnScreenTransition(DMGTransition transition)
     {

@@ -31,6 +31,10 @@ public class DMGCanvas
         _destinationRectangle = new Rectangle(posX, posY, newWidth, newHeight);
     }
 
+    public RenderTarget2D GetRenderTarget()
+    {
+        return _target;
+    }
     public void Activate()
     {
         _graphicsDevice.SetRenderTarget(_target);
@@ -39,10 +43,6 @@ public class DMGCanvas
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        // _graphicsDevice.SetRenderTarget(null);
-        // _graphicsDevice.Clear(Color.Black);
-        //spriteBatch.Begin();
         spriteBatch.Draw(_target, _destinationRectangle, Color.White);
-        //spriteBatch.End();
     }
 }
