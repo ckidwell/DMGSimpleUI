@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 namespace DMGSimpleUI.DMG.Management;
@@ -5,6 +6,7 @@ namespace DMGSimpleUI.DMG.Management;
 public class DMGUIGlobals
 {
     public static float TotalSeconds { get; set; }
+    public static TimeSpan ElapsedGameTime { get; private set; }
     public static ContentManager Content { get; set; }
     public static SpriteBatch SpriteBatch { get; set; }
     public static Point Bounds { get; set; }
@@ -22,6 +24,7 @@ public class DMGUIGlobals
     public static void Update(GameTime gt)
     {
         TotalSeconds = (float) gt.ElapsedGameTime.TotalSeconds;
+        ElapsedGameTime = gt.ElapsedGameTime;
         LastMouseState = MouseState;
         MouseState = Mouse.GetState();
         BeginDrag = (MouseState.LeftButton == ButtonState.Pressed &&

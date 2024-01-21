@@ -1,8 +1,6 @@
 using System;
-using DMGSimpleUI.DMG.Management;
 using DMGSimpleUI.DMG.Models;
-using MonoGame.Extended;
-using MonoGame.Extended.Sprites;
+using DMGSimpleUI.DMG.Utils;
 using MonoGame.Extended.Tweening;
 
 namespace DMGSimpleUI.DMG.Samples;
@@ -13,11 +11,14 @@ public class SampleSceneNavigator
     private DMGScene _outGoingScene;
     private DMGScene _incomingScene;
 
+    private bool transitioning = false;
+    
     private float _transitionHalfwayTime = 0f;
     
     private bool _transitionHalfway = false;
     private bool _transitionComplete = false;
     private readonly Tweener _tweener = new Tweener();
+    private Slide<Color> ColorSlider;
     
     public void InitializeTransition(DMGTransition transition, DMGScene outScene, DMGScene inScene)
     {
@@ -32,12 +33,19 @@ public class SampleSceneNavigator
         
         var item = transition._uiElement;
         
-        // near as i can tell tweening colors is not supported?
+        // near as i can tell tweening colors is not supported?,
+        // Monogame.extended discord user Gandifil said they would
+        // try to fix to get a overload that might support this.
         
-        _tweener.TweenTo(target: item, expression: ui => item._color, toValue: new Color(0, 0, 0, 255),
-                duration: _transition.duration, delay: .1f)
-            .Easing(EasingFunctions.QuinticIn)
-            .OnEnd(tween => _transitionComplete = true);
+        // _tweener.TweenTo(target: item, expression: ui => item._color, toValue: new Color(0, 0, 0, 255),
+        //         duration: _transition.duration, delay: .1f)
+        //     .Easing(EasingFunctions.QuinticIn)
+        //     .OnEnd(tween => _transitionComplete = true);
+        ColorSlider = new Slide<Color>(_transition._uiElement._color,
+            new Color(0, 0, 0), 2000d, Color.Lerp);
+        
+        transitioning = true;
+
     }
 
     public bool TransitionActive()
@@ -46,8 +54,15 @@ public class SampleSceneNavigator
     }
     public void Update(GameTime gameTime)
     {
-        if(!_transitionComplete)
-            _tweener.Update(gameTime.GetElapsedSeconds());
+        if (!transitioning) return;
+        
+        if (!ColorSlider.Done)
+        {
+            //_tweener.Update(gameTime.GetElapsedSeconds());
+            _transition._uiElement._color = ColorSlider.Update();
+            transitioning = false;
+        }
+            
     }
 
     public void Draw()
