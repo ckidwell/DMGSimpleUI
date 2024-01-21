@@ -18,7 +18,7 @@ public class DMGUIGlobals
     public static bool Clicked { get; set; }
     public static bool BeginDrag { get; set; }
     public static Rectangle MouseCursor { get; set; }
-    // public static Vector2 CursorScaling { get; set; } 
+    
     public static void Update(GameTime gt)
     {
         TotalSeconds = (float) gt.ElapsedGameTime.TotalSeconds;
@@ -28,7 +28,6 @@ public class DMGUIGlobals
                      LastMouseState.LeftButton == ButtonState.Released);
         Clicked = (MouseState.LeftButton == ButtonState.Pressed) &&
                   (LastMouseState.LeftButton == ButtonState.Released);
-        //MouseCursor = new Rectangle(MouseState.Position, new Point(1, 1));
         MouseCursor = new Rectangle( MouseToCursorScaling(), new Point(1, 1));
         _lastKeyboard = _currentKeyboard;
         _currentKeyboard = Keyboard.GetState();

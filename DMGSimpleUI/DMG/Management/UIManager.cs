@@ -34,7 +34,7 @@ public class UIManager
     // Render Target items
     private readonly DMGCanvas _dmgCanvas;
     private readonly GraphicsDeviceManager _graphics;
-    public static Vector2 CursorScaling { get; set; } 
+    public static Vector2 CursorScaling { get; private set; } 
 
     public UIManager(Game game, GraphicsDeviceManager graphics, DMGUITheme theme)
     {
@@ -101,14 +101,18 @@ public class UIManager
 
         var r_target_width = _dmgCanvas.GetRenderTarget().Width;
         var display_mode_width = (float) _graphics.PreferredBackBufferWidth; //GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width; <- is this for fullscreen?
-
         var divided_width = r_target_width / display_mode_width;
         
         var r_target_height = _dmgCanvas.GetRenderTarget().Height;
         var display_mode_height = (float) _graphics.PreferredBackBufferHeight; //GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; <- is this for fullscreen?
-        
         var divided_height = r_target_height / display_mode_height;
 
+       // BUG: This cursor scaling works well UNTIL we have excessive letterboxing
+       // at such time it starts stretching the coordinates to the real screen,
+       // not the rendered bit inside the letterboxing
+       // did some googling - not sure on how to solve this yet
+       // problem occurs for both vertical and horizontal letterboxing
+       
         CursorScaling = new Vector2(divided_width, divided_height);
         
         // CursorScaling = new Vector2(_dmgCanvas.GetRenderTarget().Width / (float) GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
@@ -150,8 +154,10 @@ public class UIManager
     {
         if (DMGUIGlobals.IsKeyPressed(Keys.F1)) SetResolution(1280, 720);
         if (DMGUIGlobals.IsKeyPressed(Keys.F2)) SetResolution(1920, 1080);
-        if (DMGUIGlobals.IsKeyPressed(Keys.F3)) SetResolution(640, 1080);
-        if (DMGUIGlobals.IsKeyPressed(Keys.F4)) SetFullScreen();
+        if (DMGUIGlobals.IsKeyPressed(Keys.F3)) SetResolution(1400, 900);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F4)) SetResolution(800, 1280);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F5)) SetResolution(1800, 480);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F6)) SetFullScreen();
         
         _updateActiveUi();
         
