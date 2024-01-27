@@ -23,10 +23,10 @@ public class UIManager
     private SampleSceneNavigator _sampleSceneNavigator = new SampleSceneNavigator();
     
     // Delegate for active UI 
-    private delegate void DrawActiveUI();
-    private DrawActiveUI _drawActiveUi;
-    private delegate void UpdateActiveUI();
-    private UpdateActiveUI _updateActiveUi;
+    private delegate void DrawActiveUIDelegate();
+    private DrawActiveUIDelegate _drawActiveUiDelegate;
+    private delegate void UpdateActiveUIDelegate();
+    private UpdateActiveUIDelegate _updateActiveUiDelegate;
     
     private Game _game;
     private DMGUITheme _theme;
@@ -67,8 +67,8 @@ public class UIManager
         _menuBarSample = new MenuBarSample(_theme);
         _mainMenuSample = new MainMenuSample(_theme);
 
-        _drawActiveUi = _mainMenuSample.Draw;
-        _updateActiveUi = _mainMenuSample.Update;
+        _drawActiveUiDelegate = _mainMenuSample.Draw;
+        _updateActiveUiDelegate = _mainMenuSample.Update;
          
         // _drawActiveUi = _menuBarSample.Draw;
         // _updateActiveUi = _menuBarSample.Update;
@@ -76,6 +76,7 @@ public class UIManager
         MenuBarSample.QuitGame += OnQuitGame;
         MainMenuSample.QuitGame += OnQuitGame;
         MainMenuSample.ScreenTransition += OnScreenTransition;
+        MenuBarSample.ScreenTransition += OnScreenTransition;
          
         AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
         //SetResolution(DMGUIGlobals.Bounds.X,DMGUIGlobals.Bounds.Y);
@@ -155,15 +156,26 @@ public class UIManager
     }
     private void OnScreenTransition(DMGTransition transition)
     {
-        _sampleSceneNavigator.InitializeTransition(transition, _mainMenuSample, _menuBarSample);
+        _sampleSceneNavigator.InitializeTransition(transition,
+            GetSceneByEnum(transition.callingScene),
+            GetSceneByEnum(transition.nextScene));
         transitionInProgress = true;
     }
 
+    private DMGScene GetSceneByEnum(SceneTypes scene)
+    {
+        return scene switch
+        {
+            SceneTypes.MAIN_MENU => _mainMenuSample,
+            SceneTypes.MENU_BAR => _menuBarSample,
+            _ => throw new ArgumentException("Invalid scene type"),
+        };
+    }
     public void Update(GameTime gameTime)
     {
         ProcessInput();
         
-        _updateActiveUi();
+        _updateActiveUiDelegate();
 
         if (!transitionInProgress) return;
 
@@ -174,8 +186,9 @@ public class UIManager
         else
         {
             var nextScene = _sampleSceneNavigator.NextScene();
-            _drawActiveUi = nextScene.Draw;
-            _updateActiveUi = nextScene.Update;
+            _drawActiveUiDelegate = nextScene.Draw;
+            _updateActiveUiDelegate = nextScene.Update;
+            nextScene.ReInit();
             transitionInProgress = false;
         }
 
@@ -186,7 +199,7 @@ public class UIManager
         _dmgCanvas.Activate();
         DMGUIGlobals.SpriteBatch.Begin();
         {
-            _drawActiveUi();
+            _drawActiveUiDelegate();
             DMGUIGlobals.SpriteBatch.DrawString(Font, $"Mouse: {DMGUIGlobals.MouseCursor.X} , {DMGUIGlobals.MouseCursor.Y}", new Vector2(DMGUIGlobals.Bounds.X - 150,DMGUIGlobals.Bounds.Y - 25), Color.AntiqueWhite);
             DMGUIGlobals.SpriteBatch.DrawString(Font, infoMessage.message, new Vector2( 150, DMGUIGlobals.Bounds.Y - 25), infoMessage.color);     
         }

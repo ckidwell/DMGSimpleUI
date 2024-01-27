@@ -10,16 +10,27 @@ public class MenuBarSample : DMGScene
 {
     public static Action QuitGame;
     private readonly List<BaseUIElement> _elements = new();
+    private Texture2D backgroundTexture;
+    private DMGPanel foreground;
+    public static Action<DMGTransition> ScreenTransition;
+    private SceneTypes _sceneTypes = SceneTypes.MENU_BAR;
     
     public MenuBarSample(DMGUITheme theme)
     {
-
+        backgroundTexture = DMGUIGlobals.Content.Load<Texture2D>("panelbg64x");
+        
         var t = DMGUIGlobals.Content.Load<Texture2D>("whitebutton128x32");
         var e = new DMGPanel(t,new(0, 0),
             DMGUIGlobals.UIFont,
             theme, 
             new Point(DMGUIGlobals.Bounds.X,36),
             "MENU");
+        
+        foreground = new DMGPanel(backgroundTexture, new(0, 0),
+            DMGUIGlobals.UIFont,theme,
+            new Point(DMGUIGlobals.Bounds.X, DMGUIGlobals.Bounds.Y),"", Color.Transparent);
+
+        
         _elements.Add(e);
         
         e.AddChild(new DMGButton(t,new(65, 2),theme ,DMGUIGlobals.UIFont,"NEW")).OnClick += OnNew;
@@ -33,11 +44,20 @@ public class MenuBarSample : DMGScene
             DMGUIGlobals.UIFont,theme,
             new Point(DMGUIGlobals.Bounds.X,36),
             "INFO:"));
+        e.AddChild(foreground);
     }
     
     private void OnNew(object sender, EventArgs e)
     {
-        
+        var tran = new DMGTransition()
+        {
+            TransitionType = DMGTransitionType.FADE_OUT,
+            duration = 2f,
+            callingScene = SceneTypes.MENU_BAR,
+            nextScene = SceneTypes.MAIN_MENU,
+            _uiElement = foreground,
+        };
+        ScreenTransition?.Invoke(tran);
     }
 
     private void OnTest1(object sender, EventArgs e)
@@ -71,4 +91,8 @@ public class MenuBarSample : DMGScene
             item.Draw();
         }
     } 
+    public override void ReInit()
+    {
+        foreground._color = Color.Transparent;
+    }
 }
