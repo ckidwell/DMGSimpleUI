@@ -1,9 +1,7 @@
 ﻿using DMGSimpleUI.DMG.Management;
 using DMGSimpleUI.DMG.Models;
 using DMGSimpleUI.DMG.Samples;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+
 
 namespace DMGSimpleUI;
 
@@ -25,6 +23,7 @@ public class Game1 : Game
     protected override void Initialize()
     {
         DMGUIGlobals.Content = Content;
+        DMGUIGlobals.GraphicsDeviceManager = _graphics;
         
         _theme = SampleThemes.GetFireTheme();
         _uiManager = new UIManager(this,_graphics,_theme);

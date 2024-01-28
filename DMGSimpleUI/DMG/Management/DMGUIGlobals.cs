@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 namespace DMGSimpleUI.DMG.Management;
 
-public class DMGUIGlobals
+public static class DMGUIGlobals
 {
     public static float TotalSeconds { get; set; }
     public static TimeSpan ElapsedGameTime { get; private set; }
@@ -11,7 +11,8 @@ public class DMGUIGlobals
     public static SpriteBatch SpriteBatch { get; set; }
     public static Point Bounds { get; set; }
     public static SpriteFont UIFont { get; set; }
-    public static GraphicsDevice GraphicsDevice { get; set; }
+    public static GraphicsDeviceManager GraphicsDeviceManager { get; set; }
+ 
     public static MouseState MouseState;
     public static MouseState LastMouseState;
     private static KeyboardState _lastKeyboard;

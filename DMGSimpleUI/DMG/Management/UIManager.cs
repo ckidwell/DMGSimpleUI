@@ -45,7 +45,8 @@ public class UIManager
         _theme = theme;
         _graphics = graphics;
         
-        DMGUIGlobals.Bounds = new(1280, 720);
+        
+        DMGUIGlobals.Bounds = new(640, 480);
         
         _dmgCanvas = new(_graphics.GraphicsDevice,
             DMGUIGlobals.Bounds.X,
@@ -156,6 +157,7 @@ public class UIManager
     }
     private void OnScreenTransition(DMGTransition transition)
     {
+        
         _sampleSceneNavigator.InitializeTransition(transition,
             GetSceneByEnum(transition.callingScene),
             GetSceneByEnum(transition.nextScene));
@@ -199,7 +201,12 @@ public class UIManager
         _dmgCanvas.Activate();
         DMGUIGlobals.SpriteBatch.Begin();
         {
+            
             _drawActiveUiDelegate();
+            if (_sampleSceneNavigator.TransitionActive())
+            {
+                _sampleSceneNavigator.Draw(DMGUIGlobals.SpriteBatch);
+            }
             DMGUIGlobals.SpriteBatch.DrawString(Font, $"Mouse: {DMGUIGlobals.MouseCursor.X} , {DMGUIGlobals.MouseCursor.Y}", new Vector2(DMGUIGlobals.Bounds.X - 150,DMGUIGlobals.Bounds.Y - 25), Color.AntiqueWhite);
             DMGUIGlobals.SpriteBatch.DrawString(Font, infoMessage.message, new Vector2( 150, DMGUIGlobals.Bounds.Y - 25), infoMessage.color);     
         }
