@@ -7,10 +7,12 @@ public class DMGCanvas
     private readonly RenderTarget2D _target;
     private readonly GraphicsDevice _graphicsDevice;
     private Rectangle _destinationRectangle;
-    private Color onyx = new Color(3, 4, 6, 255);
+    //private Color onyx = new Color(3, 4, 6, 255);
+    private DMGUITheme _theme;
 
-    public DMGCanvas(GraphicsDevice graphicsDevice, int width, int height)
+    public DMGCanvas(GraphicsDevice graphicsDevice, int width, int height, DMGUITheme theme)
     {
+        _theme = theme;
         _graphicsDevice = graphicsDevice;
         _target = new(_graphicsDevice, width, height);
     }
@@ -39,11 +41,15 @@ public class DMGCanvas
     public void Activate()
     {
         _graphicsDevice.SetRenderTarget(_target);
-        _graphicsDevice.Clear(onyx);
+        _graphicsDevice.Clear(_theme.backgroundColor);
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(_target, _destinationRectangle, Color.White);
     }
+}
+
+internal class DMGTheme : DMGUITheme
+{
 }

@@ -82,8 +82,8 @@ public class SampleSceneNavigator
             case DMGTransitionType.WIPE_DOWN: 
                 _r = _transition._uiElement._rect;
                 _displayHeight = DMGUIGlobals.GraphicsDeviceManager.GraphicsDevice.Viewport.Bounds.Height;
-                
-                _transition._uiElement._color = _transition.theme.foregroundColor;
+
+                _transition._uiElement._color = Color.DarkOrange; //_transition.theme.foregroundColor;
 
                 _new_r_Position = new Vector2(_r.X , _r.Y + _displayHeight);
                 rectanglePosition = transition._uiElement._position;

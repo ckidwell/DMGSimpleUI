@@ -40,7 +40,7 @@ public class MainMenuSample : DMGScene
         
         background.AddChild(new DMGPanel(backgroundTexture, new(540, 325),
             DMGUIGlobals.UIFont,_theme,
-            new Point(200, 256), "MAIN MENU PANEL"));
+            new Point(25, 25), "MAIN MENU PANEL"));
         background.AddChild( new DMGButton(t, new Vector2(V_CENTER -64, H_CENTER),
             _theme,
             DMGUIGlobals.UIFont, "PLAY GAME")).OnClick += OnPlayGame;
@@ -67,6 +67,7 @@ public class MainMenuSample : DMGScene
             nextScene = SceneTypes.MENU_BAR,
             _uiElement = foreground,
         };
+
         ScreenTransition?.Invoke(transition);
     }
 

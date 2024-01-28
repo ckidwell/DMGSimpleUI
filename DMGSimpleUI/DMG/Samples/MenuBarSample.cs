@@ -15,6 +15,7 @@ public class MenuBarSample : DMGScene
     public static Action<DMGTransition> ScreenTransition;
     private SceneTypes _sceneTypes = SceneTypes.MENU_BAR;
     private DMGUITheme _theme;
+
     
     public MenuBarSample(DMGUITheme theme)
     {
@@ -53,7 +54,8 @@ public class MenuBarSample : DMGScene
     {
         var transition = new DMGTransition()
         {
-            TransitionType = DMGTransitionType.FADE_OUT,
+            TransitionType = DMGTransitionType.WIPE_RIGHT,
+            theme = _theme,
             duration = 2f,
             callingScene = SceneTypes.MENU_BAR,
             nextScene = SceneTypes.MAIN_MENU,

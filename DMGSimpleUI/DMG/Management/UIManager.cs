@@ -49,7 +49,8 @@ public class UIManager
         
         _dmgCanvas = new(_graphics.GraphicsDevice,
             DMGUIGlobals.Bounds.X,
-            DMGUIGlobals.Bounds.Y);
+            DMGUIGlobals.Bounds.Y,
+            theme);
         
         _graphics.PreferredBackBufferWidth = DMGUIGlobals.Bounds.X;
         _graphics.PreferredBackBufferHeight =  DMGUIGlobals.Bounds.Y;
@@ -204,7 +205,7 @@ public class UIManager
             {
                 _sampleSceneNavigator.Draw(DMGUIGlobals.SpriteBatch);
             }
-             
+
         }
         DMGUIGlobals.SpriteBatch.End();
         

@@ -9,7 +9,7 @@ public static class SampleThemes
     {
         return new DMGUITheme()
         {
-            backgroundColor = new Color(18, 18, 18, 255),
+            backgroundColor = new Color(3, 4, 6, 255),
             foregroundColor = Color.Black,
             panelColor =  new Color(45,45,45,255),
             buttonNormalColor = new Color(72, 72, 72, 255),

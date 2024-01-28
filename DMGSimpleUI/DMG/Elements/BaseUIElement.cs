@@ -72,14 +72,6 @@ public class BaseUIElement
         }
     }
 
-    public void SetChildrenVisible(bool isVisible)
-    {
-        foreach (var child in _children)
-        {
-            child.Visible = isVisible;
-        }
-    }
-    
     public BaseUIElement AddChild(BaseUIElement element)
     {
         _children.Add(element);
