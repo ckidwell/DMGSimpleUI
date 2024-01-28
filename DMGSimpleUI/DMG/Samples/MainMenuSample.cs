@@ -60,7 +60,7 @@ public class MainMenuSample : DMGScene
     {
         var transition = new DMGTransition()
         {
-            TransitionType = DMGTransitionType.WIPE_RIGHT,
+            TransitionType = DMGTransitionType.WIPE_DOWN,
             theme = _theme,
             duration = 2f,
             callingScene = SceneTypes.MAIN_MENU,

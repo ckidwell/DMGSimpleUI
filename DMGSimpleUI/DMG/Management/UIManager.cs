@@ -12,10 +12,9 @@ public class UIManager
     private SpriteFont Font { get; }
     private readonly List<BaseUIElement> _elements = new();
     
-    private UIAlertMessage infoMessage = new UIAlertMessage{message = String.Empty, color = Color.White };
-   
-    private Dictionary<int, UIAlertMessage> UIAlertMessages = new Dictionary<int, UIAlertMessage>();
-    private int messageCount = 0;
+    // private UIAlertMessage infoMessage = new UIAlertMessage{message = String.Empty, color = Color.White };
+    // private Dictionary<int, UIAlertMessage> UIAlertMessages = new Dictionary<int, UIAlertMessage>();
+    // private int messageCount = 0;
     
     // UI Samples
     private MenuBarSample _menuBarSample;
@@ -79,7 +78,7 @@ public class UIManager
         MainMenuSample.ScreenTransition += OnScreenTransition;
         MenuBarSample.ScreenTransition += OnScreenTransition;
          
-        AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
+        DMGUIGlobals.AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
         //SetResolution(DMGUIGlobals.Bounds.X,DMGUIGlobals.Bounds.Y);
         SetResolution(480,360);
     }
@@ -138,12 +137,12 @@ public class UIManager
         if (DMGUIGlobals.IsKeyPressed(Keys.F5)) SetResolution(1800, 480);
         if (DMGUIGlobals.IsKeyPressed(Keys.F6)) SetFullScreen();
     }
-    public void AddUIAlertMessage(string m, Color c)
-    {
-        var newMessage = new UIAlertMessage {message = m, color = c};
-        UIAlertMessages.Add(messageCount++, newMessage);
-        infoMessage = newMessage;
-    }
+    // public void AddUIAlertMessage(string m, Color c)
+    // {
+    //     var newMessage = new UIAlertMessage {message = m, color = c};
+    //     UIAlertMessages.Add(messageCount++, newMessage);
+    //     infoMessage = newMessage;
+    // }
     public SpriteFont GetUISpriteFont()
     {
         return Font;
@@ -157,7 +156,6 @@ public class UIManager
     }
     private void OnScreenTransition(DMGTransition transition)
     {
-        
         _sampleSceneNavigator.InitializeTransition(transition,
             GetSceneByEnum(transition.callingScene),
             GetSceneByEnum(transition.nextScene));
@@ -201,14 +199,12 @@ public class UIManager
         _dmgCanvas.Activate();
         DMGUIGlobals.SpriteBatch.Begin();
         {
-            
             _drawActiveUiDelegate();
             if (_sampleSceneNavigator.TransitionActive())
             {
                 _sampleSceneNavigator.Draw(DMGUIGlobals.SpriteBatch);
             }
-            DMGUIGlobals.SpriteBatch.DrawString(Font, $"Mouse: {DMGUIGlobals.MouseCursor.X} , {DMGUIGlobals.MouseCursor.Y}", new Vector2(DMGUIGlobals.Bounds.X - 150,DMGUIGlobals.Bounds.Y - 25), Color.AntiqueWhite);
-            DMGUIGlobals.SpriteBatch.DrawString(Font, infoMessage.message, new Vector2( 150, DMGUIGlobals.Bounds.Y - 25), infoMessage.color);     
+             
         }
         DMGUIGlobals.SpriteBatch.End();
         

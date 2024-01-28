@@ -7,6 +7,7 @@ public class DMGCanvas
     private readonly RenderTarget2D _target;
     private readonly GraphicsDevice _graphicsDevice;
     private Rectangle _destinationRectangle;
+    private Color onyx = new Color(3, 4, 6, 255);
 
     public DMGCanvas(GraphicsDevice graphicsDevice, int width, int height)
     {
@@ -38,7 +39,7 @@ public class DMGCanvas
     public void Activate()
     {
         _graphicsDevice.SetRenderTarget(_target);
-        _graphicsDevice.Clear(Color.MonoGameOrange);
+        _graphicsDevice.Clear(onyx);
     }
 
     public void Draw(SpriteBatch spriteBatch)

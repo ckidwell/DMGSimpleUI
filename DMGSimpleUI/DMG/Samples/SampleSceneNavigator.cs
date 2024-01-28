@@ -23,6 +23,12 @@ public class SampleSceneNavigator
     public Vector2 rectanglePosition;
     private Rectangle RectangleDestination;
     
+    // Wipe variables
+    private Rectangle _r = Rectangle.Empty;
+    private int _displayWidth;
+    private int _displayHeight;
+    private Vector2 _new_r_Position;
+    
     public void InitializeTransition(DMGTransition transition, DMGScene outScene, DMGScene inScene)
     {
         _transition = transition;
@@ -48,18 +54,18 @@ public class SampleSceneNavigator
                 break;
             case DMGTransitionType.WIPE_RIGHT:
                 
-                var r = _transition._uiElement._rect;
-                var displayWidth = DMGUIGlobals.GraphicsDeviceManager.GraphicsDevice.Viewport.Bounds.Right;
+                _r = _transition._uiElement._rect;
+                _displayWidth = DMGUIGlobals.GraphicsDeviceManager.GraphicsDevice.Viewport.Bounds.Right;
                 
                 _transition._uiElement._color = _transition.theme.foregroundColor;
 
-                var new_r_Position = new Vector2(r.X + displayWidth, r.Y);
+                _new_r_Position = new Vector2(_r.X + _displayWidth, _r.Y);
                 rectanglePosition = transition._uiElement._position;
         
                  _tweener.TweenTo( 
                           this,
                          i => i.rectanglePosition,
-                         new_r_Position,
+                         _new_r_Position,
                           _transition.duration,
                          .1f)
                      .Easing(EasingFunctions.QuinticIn)
@@ -74,7 +80,24 @@ public class SampleSceneNavigator
               
                 break;
             case DMGTransitionType.WIPE_DOWN: 
-              
+                _r = _transition._uiElement._rect;
+                _displayHeight = DMGUIGlobals.GraphicsDeviceManager.GraphicsDevice.Viewport.Bounds.Height;
+                
+                _transition._uiElement._color = _transition.theme.foregroundColor;
+
+                _new_r_Position = new Vector2(_r.X , _r.Y + _displayHeight);
+                rectanglePosition = transition._uiElement._position;
+        
+                _tweener.TweenTo( 
+                        this,
+                        i => i.rectanglePosition,
+                        _new_r_Position,
+                        _transition.duration,
+                        .1f)
+                    .Easing(EasingFunctions.QuinticIn)
+                    .OnEnd(tween => transitioning = false);
+                
+                transitioning = true;
                 break;
             
         }
@@ -104,13 +127,16 @@ public class SampleSceneNavigator
                 Fade ();
                 break;
             case DMGTransitionType.WIPE_RIGHT: 
-                WipeRight ();
+                Wipe();
+                break;
+            case DMGTransitionType.WIPE_DOWN: 
+                Wipe();
                 break;
         }
         
     }
 
-    private void WipeRight()
+    private void Wipe()
     {
         _tweener.Update((float)DMGUIGlobals.ElapsedGameTime.TotalSeconds);
     }
@@ -148,6 +174,11 @@ public class SampleSceneNavigator
             case DMGTransitionType.WIPE_LEFT:
                 break;
             case DMGTransitionType.WIPE_DOWN:
+                _spriteBatch.FillRectangle(rectanglePosition.X,
+                    rectanglePosition.Y,
+                    _transition._uiElement._rect.Size.X,
+                    _transition._uiElement._rect.Size.Y,
+                    _transition.theme.foregroundColor);
                 break;
             case DMGTransitionType.WIPE_UP:
                 break;

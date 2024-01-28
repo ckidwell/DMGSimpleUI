@@ -25,7 +25,7 @@ public class Game1 : Game
         DMGUIGlobals.Content = Content;
         DMGUIGlobals.GraphicsDeviceManager = _graphics;
         
-        _theme = SampleThemes.GetFireTheme();
+        _theme = SampleThemes.GetDarkTheme();
         _uiManager = new UIManager(this,_graphics,_theme);
         
         //_graphics.ApplyChanges();
@@ -54,14 +54,6 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         _uiManager.Draw();
-        //GraphicsDevice.Clear(_theme.backgroundColor);
-
-       // _spriteBatch.Begin();
-       // {
-       //     _uiManager.Draw();
-       // }
-       // _spriteBatch.End();
-
         base.Draw(gameTime);
     }
 
