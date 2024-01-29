@@ -18,7 +18,6 @@ public static class SampleThemes
             fontColor = new Color(111, 156, 245, 255),
             fontHoverColor = new Color(109,156,249,255),
             fontDisabledColor = new Color(111,130,130,255),
-
         };
     }
     public static DMGUITheme GetFireTheme()

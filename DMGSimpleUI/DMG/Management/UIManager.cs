@@ -205,7 +205,7 @@ public class UIManager
             {
                 _sampleSceneNavigator.Draw(DMGUIGlobals.SpriteBatch);
             }
-
+           
         }
         DMGUIGlobals.SpriteBatch.End();
         
