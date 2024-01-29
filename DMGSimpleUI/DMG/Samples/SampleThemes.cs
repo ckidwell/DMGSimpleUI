@@ -9,15 +9,15 @@ public static class SampleThemes
     {
         return new DMGUITheme()
         {
-            backgroundColor = new Color(18, 18, 18, 255),
+            backgroundColor = new Color(3, 4, 6, 255),
+            foregroundColor = Color.Black,
             panelColor =  new Color(45,45,45,255),
             buttonNormalColor = new Color(72, 72, 72, 255),
             buttonDisabledColor = new Color(36, 36, 36, 255),
-            buttonHoverOverColor = new Color(7, 79, 222, 255),
+            buttonHoverOverColor = new Color(40, 49, 69, 255),
             fontColor = new Color(111, 156, 245, 255),
             fontHoverColor = new Color(109,156,249,255),
             fontDisabledColor = new Color(111,130,130,255),
-
         };
     }
     public static DMGUITheme GetFireTheme()
@@ -25,6 +25,7 @@ public static class SampleThemes
         return new DMGUITheme()
         {
             backgroundColor = new Color(27, 11, 0, 255),
+            foregroundColor = Color.Black,
             panelColor =  new Color(93,37,0,255),
             buttonNormalColor = new Color(153, 61, 4, 255),
             buttonDisabledColor = new Color(113, 66, 36, 255),

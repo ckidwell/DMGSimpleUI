@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using DMGSimpleUI.DMG.Elements;
 
 namespace DMGSimpleUI.DMG.Models;
@@ -6,8 +5,9 @@ namespace DMGSimpleUI.DMG.Models;
 public class DMGTransition
 {
     public DMGTransitionType TransitionType { get; set; }
+    public DMGUITheme theme { get; set; }
     public BaseUIElement _uiElement;
-    //public List<BaseUIElement> _elements = new();
+    public SceneTypes nextScene;
     public float duration;
     public bool isDone;
 }

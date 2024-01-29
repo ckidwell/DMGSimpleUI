@@ -8,16 +8,20 @@ public class BaseUIElement
 {
     protected Texture2D _texture;
     protected string _text;
-    protected Vector2 _position;
-    protected Rectangle _rect;
+    public Vector2 _position;
+    public Rectangle _rect;
     protected Color _shade = Color.White;
     public Color _color;
     protected SpriteFont _font;
     protected Vector2 _origin;
     protected int leftTextPadding;
     protected int topleftTextPadding;
-    protected double screenWidthAdjustment;
-    protected double screenHeightAdjustment;
+
+    public bool Visible { get; protected set; } = true;
+    
+    // protected double screenWidthAdjustment;
+    // protected double screenHeightAdjustment;
+    
     protected bool _interactable = false;
 
     protected List<BaseUIElement> _children = new List<BaseUIElement>();
@@ -36,9 +40,9 @@ public class BaseUIElement
         _children.AddRange(children);
         
         // ReSharper disable once PossibleLossOfFraction
-        screenWidthAdjustment = DMGUIGlobals.Bounds.X / 2 - t.Width ;
+        //screenWidthAdjustment = DMGUIGlobals.Bounds.X / 2 - t.Width ;
         // ReSharper disable once PossibleLossOfFraction
-        screenHeightAdjustment = DMGUIGlobals.Bounds.Y / 2 - (t.Height * 4.2);
+       //screenHeightAdjustment = DMGUIGlobals.Bounds.Y / 2 - (t.Height * 4.2);
         
         leftTextPadding = (int) (t.Height /2 );
         topleftTextPadding = (int) (t.Width  * .1);
@@ -48,7 +52,7 @@ public class BaseUIElement
     {
         
     }
-
+    
     public virtual void Update()
     {
         if (!_interactable) return;
@@ -67,7 +71,7 @@ public class BaseUIElement
             e.Draw();
         }
     }
-    
+
     public BaseUIElement AddChild(BaseUIElement element)
     {
         _children.Add(element);

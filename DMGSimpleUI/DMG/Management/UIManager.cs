@@ -12,10 +12,9 @@ public class UIManager
     private SpriteFont Font { get; }
     private readonly List<BaseUIElement> _elements = new();
     
-    private UIAlertMessage infoMessage = new UIAlertMessage{message = String.Empty, color = Color.White };
-   
-    private Dictionary<int, UIAlertMessage> UIAlertMessages = new Dictionary<int, UIAlertMessage>();
-    private int messageCount = 0;
+    // private UIAlertMessage infoMessage = new UIAlertMessage{message = String.Empty, color = Color.White };
+    // private Dictionary<int, UIAlertMessage> UIAlertMessages = new Dictionary<int, UIAlertMessage>();
+    // private int messageCount = 0;
     
     // UI Samples
     private MenuBarSample _menuBarSample;
@@ -23,13 +22,18 @@ public class UIManager
     private SampleSceneNavigator _sampleSceneNavigator = new SampleSceneNavigator();
     
     // Delegate for active UI 
-    private delegate void DrawActiveUI();
-    private DrawActiveUI _drawActiveUi;
-    private delegate void UpdateActiveUI();
-    private UpdateActiveUI _updateActiveUi;
+    private delegate void DrawActiveUIDelegate();
+    private DrawActiveUIDelegate _drawActiveUiDelegate;
+    private delegate void UpdateActiveUIDelegate();
+    private UpdateActiveUIDelegate _updateActiveUiDelegate;
+
+    private DMGScene nextScene;
     
     private Game _game;
     private DMGUITheme _theme;
+    
+    //scene transition
+    private bool transitionInProgress = false;
     
     // Render Target items
     private readonly DMGCanvas _dmgCanvas;
@@ -42,11 +46,13 @@ public class UIManager
         _theme = theme;
         _graphics = graphics;
         
+        
         DMGUIGlobals.Bounds = new(1280, 720);
         
         _dmgCanvas = new(_graphics.GraphicsDevice,
             DMGUIGlobals.Bounds.X,
-            DMGUIGlobals.Bounds.Y);
+            DMGUIGlobals.Bounds.Y,
+            theme);
         
         _graphics.PreferredBackBufferWidth = DMGUIGlobals.Bounds.X;
         _graphics.PreferredBackBufferHeight =  DMGUIGlobals.Bounds.Y;
@@ -64,8 +70,8 @@ public class UIManager
         _menuBarSample = new MenuBarSample(_theme);
         _mainMenuSample = new MainMenuSample(_theme);
 
-        _drawActiveUi = _mainMenuSample.Draw;
-        _updateActiveUi = _mainMenuSample.Update;
+        _drawActiveUiDelegate = _mainMenuSample.Draw;
+        _updateActiveUiDelegate = _mainMenuSample.Update;
          
         // _drawActiveUi = _menuBarSample.Draw;
         // _updateActiveUi = _menuBarSample.Update;
@@ -73,10 +79,11 @@ public class UIManager
         MenuBarSample.QuitGame += OnQuitGame;
         MainMenuSample.QuitGame += OnQuitGame;
         MainMenuSample.ScreenTransition += OnScreenTransition;
+        MenuBarSample.ScreenTransition += OnScreenTransition;
          
-        AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
+        DMGUIGlobals.AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
         //SetResolution(DMGUIGlobals.Bounds.X,DMGUIGlobals.Bounds.Y);
-        SetResolution(480,360);
+        SetResolution(1280,720);
     }
     
     private void SetResolution(int height, int width)
@@ -118,11 +125,7 @@ public class UIManager
         // CursorScaling = new Vector2(_dmgCanvas.GetRenderTarget().Width / (float) GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
         //     _dmgCanvas.GetRenderTarget().Height / (float) GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
     }
-    private void OnScreenTransition(DMGTransition transition)
-    {
-        _sampleSceneNavigator.InitializeTransition(transition, _mainMenuSample, _menuBarSample);
-    }
-
+  
     private void OnQuitGame()
     {
         _game.Exit();
@@ -130,14 +133,19 @@ public class UIManager
 
     public void ProcessInput()
     {
-        
+        if (DMGUIGlobals.IsKeyPressed(Keys.F1)) SetResolution(1280, 720);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F2)) SetResolution(1920, 1080);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F3)) SetResolution(1400, 900);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F4)) SetResolution(800, 1280);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F5)) SetResolution(1800, 480);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F6)) SetFullScreen();
     }
-    public void AddUIAlertMessage(string m, Color c)
-    {
-        var newMessage = new UIAlertMessage {message = m, color = c};
-        UIAlertMessages.Add(messageCount++, newMessage);
-        infoMessage = newMessage;
-    }
+    // public void AddUIAlertMessage(string m, Color c)
+    // {
+    //     var newMessage = new UIAlertMessage {message = m, color = c};
+    //     UIAlertMessages.Add(messageCount++, newMessage);
+    //     infoMessage = newMessage;
+    // }
     public SpriteFont GetUISpriteFont()
     {
         return Font;
@@ -149,20 +157,44 @@ public class UIManager
 
         return e;
     }
+    private void OnScreenTransition(DMGTransition transition)
+    {
+        _sampleSceneNavigator.InitializeTransition(transition,
+            GetSceneByEnum(transition.nextScene));
+        nextScene = GetSceneByEnum(transition.nextScene);
+        SetNextScene();
+        transitionInProgress = true;
+    }
 
+    private DMGScene GetSceneByEnum(SceneTypes scene)
+    {
+        return scene switch
+        {
+            SceneTypes.MAIN_MENU => _mainMenuSample,
+            SceneTypes.MENU_BAR => _menuBarSample,
+            _ => throw new ArgumentException("Invalid scene type"),
+        };
+    }
     public void Update(GameTime gameTime)
     {
-        if (DMGUIGlobals.IsKeyPressed(Keys.F1)) SetResolution(1280, 720);
-        if (DMGUIGlobals.IsKeyPressed(Keys.F2)) SetResolution(1920, 1080);
-        if (DMGUIGlobals.IsKeyPressed(Keys.F3)) SetResolution(1400, 900);
-        if (DMGUIGlobals.IsKeyPressed(Keys.F4)) SetResolution(800, 1280);
-        if (DMGUIGlobals.IsKeyPressed(Keys.F5)) SetResolution(1800, 480);
-        if (DMGUIGlobals.IsKeyPressed(Keys.F6)) SetFullScreen();
+        ProcessInput();
         
-        _updateActiveUi();
-        
-        if(_sampleSceneNavigator.TransitionActive())
+        _updateActiveUiDelegate();
+
+        if (!transitionInProgress) return;
+
+        if (_sampleSceneNavigator.TransitionActive())
+        {
             _sampleSceneNavigator.Update(gameTime);
+        }
+    }
+
+    private void SetNextScene()
+    {
+        _drawActiveUiDelegate = nextScene.Draw;
+        _updateActiveUiDelegate = nextScene.Update;
+        nextScene.ReInit();
+        transitionInProgress = false;
     }
 
     public void Draw()
@@ -170,9 +202,12 @@ public class UIManager
         _dmgCanvas.Activate();
         DMGUIGlobals.SpriteBatch.Begin();
         {
-            _drawActiveUi();
-            DMGUIGlobals.SpriteBatch.DrawString(Font, $"Mouse: {DMGUIGlobals.MouseCursor.X} , {DMGUIGlobals.MouseCursor.Y}", new Vector2(DMGUIGlobals.Bounds.X - 150,DMGUIGlobals.Bounds.Y - 25), Color.AntiqueWhite);
-            DMGUIGlobals.SpriteBatch.DrawString(Font, infoMessage.message, new Vector2( 150, DMGUIGlobals.Bounds.Y - 25), infoMessage.color);     
+            _drawActiveUiDelegate();
+            if (_sampleSceneNavigator.TransitionActive())
+            {
+                _sampleSceneNavigator.Draw(DMGUIGlobals.SpriteBatch);
+            }
+           
         }
         DMGUIGlobals.SpriteBatch.End();
         

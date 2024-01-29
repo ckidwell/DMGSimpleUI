@@ -10,49 +10,64 @@ public class MainMenuSample : DMGScene
 {
     public static Action QuitGame;
     public static Action<DMGTransition> ScreenTransition;
-
+    private SceneTypes _sceneTypes = SceneTypes.MAIN_MENU;
+    
     private Texture2D backgroundTexture;
     private readonly List<BaseUIElement> _elements = new();
 
     private DMGPanel background;
+    private DMGPanel foreground;
+    private DMGUITheme _theme;
     
     public MainMenuSample(DMGUITheme theme)
     {
+        _theme = theme;
+        
         backgroundTexture = DMGUIGlobals.Content.Load<Texture2D>("panelbg64x");
+        
         var t = DMGUIGlobals.Content.Load<Texture2D>("whitebutton128x32"); 
         
         background = new DMGPanel(backgroundTexture, new(0, 0),
-            DMGUIGlobals.UIFont,theme,
+            DMGUIGlobals.UIFont,_theme,
             new Point(DMGUIGlobals.Bounds.X, DMGUIGlobals.Bounds.Y), "BACKGROUND PANEL..");
-
+        foreground = new DMGPanel(backgroundTexture, new(0, 0),
+            DMGUIGlobals.UIFont,_theme,
+            new Point(DMGUIGlobals.Bounds.X, DMGUIGlobals.Bounds.Y), "                                             FOREGROUND PANEL..", Color.Transparent);
+        
         // ReSharper disable once PossibleLossOfFraction
         var H_CENTER = (float)(DMGUIGlobals.Bounds.Y / 2) ;
         var V_CENTER = (float)DMGUIGlobals.Bounds.X / 2;
+        
         background.AddChild(new DMGPanel(backgroundTexture, new(540, 325),
-            DMGUIGlobals.UIFont,theme,
-            new Point(200, 256), "MAIN MENU PANEL"));
+            DMGUIGlobals.UIFont,_theme,
+            new Point(25, 25), "MAIN MENU PANEL"));
         background.AddChild( new DMGButton(t, new Vector2(V_CENTER -64, H_CENTER),
-            theme,
+            _theme,
             DMGUIGlobals.UIFont, "PLAY GAME")).OnClick += OnPlayGame;
         background.AddChild(new DMGButton(t, new Vector2(V_CENTER -64, H_CENTER +35),
-            theme,
+            _theme,
             DMGUIGlobals.UIFont, "SETTINGS")).OnClick += OnSettings;
         background.AddChild(new DMGButton(t, new Vector2(V_CENTER -64, H_CENTER +70),
-            theme,
+            _theme,
             DMGUIGlobals.UIFont, "QUIT GAME")).OnClick += OnQuit;
+        
+        background.AddChild(foreground);
         
         _elements.Add(background);
     }
 
     private void OnPlayGame(object sender, EventArgs e)
     {
-        var tran = new DMGTransition()
+        var transition = new DMGTransition()
         {
-            TransitionType = DMGTransitionType.FADE_OUT,
+            TransitionType = DMGTransitionType.WIPE_RIGHT,
+            theme = _theme,
             duration = 2f,
-            _uiElement = background,
+            nextScene = SceneTypes.MENU_BAR,
+            _uiElement = foreground,
         };
-        ScreenTransition?.Invoke(tran);
+
+        ScreenTransition?.Invoke(transition);
     }
 
     private void OnSettings(object sender, EventArgs e)
@@ -77,7 +92,17 @@ public class MainMenuSample : DMGScene
     {
         foreach (var item in _elements)
         {
-            item.Draw();
+            if(item.Visible) item.Draw();
         }
-    } 
+    }
+
+    public override void ReInit()
+    {
+        foreground._color = Color.Transparent;
+    }
+
+    public override List<BaseUIElement> GetElements()
+    {
+        return _elements;
+    }
 }

@@ -5,7 +5,8 @@ namespace DMGSimpleUI.DMG.Elements;
 
 public class DMGPanel : BaseUIElement
 {
-    public DMGPanel(Texture2D t, Vector2 position,SpriteFont f, DMGUITheme theme,  Point size, string text = "")
+
+    public DMGPanel(Texture2D t, Vector2 position,SpriteFont f, DMGUITheme theme,  Point size, string text = "", Color? color = null)
     {
         _texture = t;
         _position = position;
@@ -13,7 +14,7 @@ public class DMGPanel : BaseUIElement
         _origin = new Vector2( 0,0);
         _rect = new Rectangle((int)position.X, (int)position.Y, size.Y, size.X);
         _font = f;
-        _color = theme.panelColor;
+        _color = color ?? theme.panelColor;
         _interactable = true;
         
 

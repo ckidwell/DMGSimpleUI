@@ -7,6 +7,7 @@ public class DMGUITheme
     public Color buttonDisabledColor;
     
     public Color backgroundColor;
+    public Color foregroundColor;
     public Color panelColor;
     
     public Color fontColor;
