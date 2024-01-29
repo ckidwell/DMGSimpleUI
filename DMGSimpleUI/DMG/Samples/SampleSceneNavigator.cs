@@ -15,7 +15,6 @@ public class SampleSceneNavigator
     private DMGScene _incomingScene;
 
     private bool transitioning = false;
-    private bool _transitionHalfway = false;
     
     private readonly Tweener _tweener = new Tweener();
     private Slide<Color> ColorSlider;
@@ -34,8 +33,7 @@ public class SampleSceneNavigator
         _transition = transition;
         _outGoingScene = outScene;
         _incomingScene = inScene;
-        
-        _transitionHalfway = false;
+
         
         // near as i can tell tweening colors is not supported?,
         // Monogame.extended discord user Gandifil said they would
