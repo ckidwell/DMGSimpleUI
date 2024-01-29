@@ -11,16 +11,14 @@ namespace DMGSimpleUI.DMG.Samples;
 public class SampleSceneNavigator
 {
     private DMGTransition _transition;
-    private DMGScene _outGoingScene;
     private DMGScene _incomingScene;
 
-    private bool transitioning = false;
+    private bool transitioning;
     
     private readonly Tweener _tweener = new Tweener();
     private Slide<Color> ColorSlider;
 
     public Vector2 rectanglePosition;
-    private Rectangle RectangleDestination;
     
     // Wipe variables
     private Rectangle _r = Rectangle.Empty;
@@ -31,7 +29,6 @@ public class SampleSceneNavigator
     public void InitializeTransition(DMGTransition transition, DMGScene outScene, DMGScene inScene)
     {
         _transition = transition;
-        _outGoingScene = outScene;
         _incomingScene = inScene;
         
         // near as i can tell tweening colors is not supported?,
