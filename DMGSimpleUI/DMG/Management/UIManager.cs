@@ -45,7 +45,7 @@ public class UIManager
         _graphics = graphics;
         
         
-        DMGUIGlobals.Bounds = new(640, 480);
+        DMGUIGlobals.Bounds = new(1280, 720);
         
         _dmgCanvas = new(_graphics.GraphicsDevice,
             DMGUIGlobals.Bounds.X,
@@ -81,7 +81,7 @@ public class UIManager
          
         DMGUIGlobals.AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
         //SetResolution(DMGUIGlobals.Bounds.X,DMGUIGlobals.Bounds.Y);
-        SetResolution(480,360);
+        SetResolution(1280,720);
     }
     
     private void SetResolution(int height, int width)

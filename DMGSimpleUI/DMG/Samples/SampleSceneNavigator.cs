@@ -56,8 +56,8 @@ public class SampleSceneNavigator
                 
                 _r = _transition._uiElement._rect;
                 _displayWidth = DMGUIGlobals.GraphicsDeviceManager.GraphicsDevice.Viewport.Bounds.Right;
-                
-                _transition._uiElement._color = _transition.theme.foregroundColor;
+
+                _transition._uiElement._color = Color.Blue; //_transition.theme.foregroundColor;
 
                 _new_r_Position = new Vector2(_r.X + _displayWidth, _r.Y);
                 rectanglePosition = transition._uiElement._position;
@@ -82,10 +82,10 @@ public class SampleSceneNavigator
             case DMGTransitionType.WIPE_DOWN: 
                 _r = _transition._uiElement._rect;
                 _displayHeight = DMGUIGlobals.GraphicsDeviceManager.GraphicsDevice.Viewport.Bounds.Height;
+                _displayWidth = DMGUIGlobals.GraphicsDeviceManager.GraphicsDevice.Viewport.Bounds.Right;
+                _transition._uiElement._color = Color.Blue; //_transition.theme.foregroundColor;
 
-                _transition._uiElement._color = Color.DarkOrange; //_transition.theme.foregroundColor;
-
-                _new_r_Position = new Vector2(_r.X , _r.Y + _displayHeight);
+                _new_r_Position = new Vector2(_r.X + _displayWidth, _r.Y ); //+ _displayHeight
                 rectanglePosition = transition._uiElement._position;
         
                 _tweener.TweenTo( 
@@ -167,8 +167,8 @@ public class SampleSceneNavigator
             case DMGTransitionType.WIPE_RIGHT:
                 _spriteBatch.FillRectangle(rectanglePosition.X,
                     rectanglePosition.Y,
-                    _transition._uiElement._rect.Size.X,
                     _transition._uiElement._rect.Size.Y,
+                    _transition._uiElement._rect.Size.X,
                     _transition.theme.foregroundColor);
                 break;
             case DMGTransitionType.WIPE_LEFT:
@@ -176,8 +176,8 @@ public class SampleSceneNavigator
             case DMGTransitionType.WIPE_DOWN:
                 _spriteBatch.FillRectangle(rectanglePosition.X,
                     rectanglePosition.Y,
-                    _transition._uiElement._rect.Size.X,
                     _transition._uiElement._rect.Size.Y,
+                    _transition._uiElement._rect.Size.X,
                     _transition.theme.foregroundColor);
                 break;
             case DMGTransitionType.WIPE_UP:

@@ -14,7 +14,7 @@ public static class SampleThemes
             panelColor =  new Color(45,45,45,255),
             buttonNormalColor = new Color(72, 72, 72, 255),
             buttonDisabledColor = new Color(36, 36, 36, 255),
-            buttonHoverOverColor = new Color(7, 79, 222, 255),
+            buttonHoverOverColor = new Color(40, 49, 69, 255),
             fontColor = new Color(111, 156, 245, 255),
             fontHoverColor = new Color(109,156,249,255),
             fontDisabledColor = new Color(111,130,130,255),
