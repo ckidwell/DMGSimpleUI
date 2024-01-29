@@ -57,7 +57,6 @@ public class MenuBarSample : DMGScene
             TransitionType = DMGTransitionType.WIPE_RIGHT,
             theme = _theme,
             duration = 2f,
-            callingScene = SceneTypes.MENU_BAR,
             nextScene = SceneTypes.MAIN_MENU,
             _uiElement = foreground,
         };

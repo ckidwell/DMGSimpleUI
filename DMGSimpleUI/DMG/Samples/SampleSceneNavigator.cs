@@ -26,7 +26,7 @@ public class SampleSceneNavigator
     private int _displayHeight;
     private Vector2 _new_r_Position;
     
-    public void InitializeTransition(DMGTransition transition, DMGScene outScene, DMGScene inScene)
+    public void InitializeTransition(DMGTransition transition,  DMGScene inScene)
     {
         _transition = transition;
         _incomingScene = inScene;

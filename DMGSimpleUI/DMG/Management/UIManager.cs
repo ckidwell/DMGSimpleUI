@@ -26,6 +26,8 @@ public class UIManager
     private DrawActiveUIDelegate _drawActiveUiDelegate;
     private delegate void UpdateActiveUIDelegate();
     private UpdateActiveUIDelegate _updateActiveUiDelegate;
+
+    private DMGScene nextScene;
     
     private Game _game;
     private DMGUITheme _theme;
@@ -158,8 +160,9 @@ public class UIManager
     private void OnScreenTransition(DMGTransition transition)
     {
         _sampleSceneNavigator.InitializeTransition(transition,
-            GetSceneByEnum(transition.callingScene),
             GetSceneByEnum(transition.nextScene));
+        nextScene = GetSceneByEnum(transition.nextScene);
+        SetNextScene();
         transitionInProgress = true;
     }
 
@@ -184,15 +187,14 @@ public class UIManager
         {
             _sampleSceneNavigator.Update(gameTime);
         }
-        else
-        {
-            var nextScene = _sampleSceneNavigator.NextScene();
-            _drawActiveUiDelegate = nextScene.Draw;
-            _updateActiveUiDelegate = nextScene.Update;
-            nextScene.ReInit();
-            transitionInProgress = false;
-        }
+    }
 
+    private void SetNextScene()
+    {
+        _drawActiveUiDelegate = nextScene.Draw;
+        _updateActiveUiDelegate = nextScene.Update;
+        nextScene.ReInit();
+        transitionInProgress = false;
     }
 
     public void Draw()
