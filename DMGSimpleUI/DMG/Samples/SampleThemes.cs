@@ -10,11 +10,11 @@ public static class SampleThemes
         return new DMGUITheme()
         {
             backgroundColor = new Color(3, 4, 6, 255),
-            foregroundColor = Color.Black,
-            panelColor =  new Color(45,45,45,255),
-            buttonNormalColor = new Color(72, 72, 72, 255),
+            foregroundColor = new Color(39,50,68,255),
+            panelColor =  new Color(41,61,88,255),
+            buttonNormalColor = new Color(42, 71, 109, 255),
             buttonDisabledColor = new Color(36, 36, 36, 255),
-            buttonHoverOverColor = new Color(40, 49, 69, 255),
+            buttonHoverOverColor = new Color(36, 94, 152, 255),
             fontColor = new Color(111, 156, 245, 255),
             fontHoverColor = new Color(109,156,249,255),
             fontDisabledColor = new Color(111,130,130,255),
@@ -24,13 +24,13 @@ public static class SampleThemes
     {
         return new DMGUITheme()
         {
-            backgroundColor = new Color(27, 11, 0, 255),
-            foregroundColor = Color.Black,
-            panelColor =  new Color(93,37,0,255),
-            buttonNormalColor = new Color(153, 61, 4, 255),
+            backgroundColor = new Color(45, 26, 26, 255),
+            foregroundColor = new Color(45, 26, 26, 255),
+            panelColor =  new Color(66,31,29,255),
+            buttonNormalColor = new Color(148, 52, 24, 255),
             buttonDisabledColor = new Color(113, 66, 36, 255),
-            buttonHoverOverColor = new Color(193, 77, 4, 255),
-            fontColor = new Color(249, 160, 31, 255),
+            buttonHoverOverColor = new Color(167, 60, 15, 255),
+            fontColor = new Color(187, 60, 15, 255),
             fontHoverColor = new Color(249, 160, 31, 255),
             fontDisabledColor = new Color(196,180,157,255),
 

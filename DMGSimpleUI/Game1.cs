@@ -25,7 +25,7 @@ public class Game1 : Game
         DMGUIGlobals.Content = Content;
         DMGUIGlobals.GraphicsDeviceManager = _graphics;
         
-        _theme = SampleThemes.GetDarkTheme();
+        _theme = SampleThemes.GetFireTheme();
         _uiManager = new UIManager(this,_graphics,_theme);
         
         //_graphics.ApplyChanges();
