@@ -37,6 +37,7 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         DMGUIGlobals.SpriteBatch = _spriteBatch;
+        SampleSpriteLoader.LoadSampleSprites(Content);
     }
 
     protected override void Update(GameTime gameTime)

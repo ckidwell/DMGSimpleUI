@@ -44,7 +44,7 @@
 /processorParam:TextureFormat=Color
 /build:SampleSprites/tui_background.png
 
-#begin SampleSprites/tui_exit..png
+#begin SampleSprites/tui_exit.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -54,7 +54,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:SampleSprites/tui_exit..png
+/build:SampleSprites/tui_exit.png
 
 #begin SampleSprites/tui_gametitle.png
 /importer:TextureImporter
