@@ -26,7 +26,7 @@ public static class SampleThemes
         return new DMGUITheme()
         {
             backgroundColor = new Color(45, 26, 26, 255),
-            foregroundColor = new Color(45, 26, 26, 255),
+            foregroundColor = new Color(41, 179, 214, 255),
             panelColor =  new Color(66,31,29,255),
             buttonNormalColor = new Color(148, 52, 24, 255),
             buttonDisabledColor = new Color(113, 66, 36, 255),
@@ -34,7 +34,6 @@ public static class SampleThemes
             fontColor = new Color(187, 60, 15, 255),
             fontHoverColor = new Color(249, 160, 31, 255),
             fontDisabledColor = new Color(196,180,157,255),
-
         };
     }
     public static DMGUITheme GetTexturedTheme()
@@ -45,7 +44,7 @@ public static class SampleThemes
             panelColor =  Color.White,
             buttonNormalColor =  Color.White,
             buttonDisabledColor = new Color(169, 169, 169, 255),
-            buttonHoverOverColor =  new Color(237,237,237,255),
+            buttonHoverOverColor =  new Color(210,210,210,255),
             fontColor = new Color(128, 128, 128, 255),
             fontHoverColor =  new Color(128, 128, 128, 255),
             fontDisabledColor = new Color(128, 128, 128, 255),

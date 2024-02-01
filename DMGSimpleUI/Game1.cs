@@ -2,7 +2,6 @@
 using DMGSimpleUI.DMG.Models;
 using DMGSimpleUI.DMG.Samples;
 
-
 namespace DMGSimpleUI;
 
 public class Game1 : Game

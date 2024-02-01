@@ -80,12 +80,14 @@ public class UIManager
         
         MenuBarSample.QuitGame += OnQuitGame;
         MainMenuSample.QuitGame += OnQuitGame;
+        SpriteMainMenuSample.QuitGame += OnQuitGame;
         MainMenuSample.ScreenTransition += OnScreenTransition;
+        SpriteMainMenuSample.ScreenTransition += OnScreenTransition;
         MenuBarSample.ScreenTransition += OnScreenTransition;
          
         DMGUIGlobals.AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
         //SetResolution(DMGUIGlobals.Bounds.X,DMGUIGlobals.Bounds.Y);
-        SetResolution(1280,720);
+        SetResolution(640,480);
     }
     
     private void SetResolution(int height, int width)
@@ -209,7 +211,6 @@ public class UIManager
             {
                 _sampleSceneNavigator.Draw(DMGUIGlobals.SpriteBatch);
             }
-           
         }
         DMGUIGlobals.SpriteBatch.End();
         
