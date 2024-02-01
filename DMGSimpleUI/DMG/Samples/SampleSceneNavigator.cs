@@ -133,7 +133,6 @@ public class SampleSceneNavigator
                 Wipe();
                 break;
         }
-        
     }
 
     private void Wipe()

@@ -26,7 +26,7 @@ public static class SampleThemes
         return new DMGUITheme()
         {
             backgroundColor = new Color(45, 26, 26, 255),
-            foregroundColor = new Color(41, 179, 214, 255),
+            foregroundColor = new Color(45, 26, 26, 255),
             panelColor =  new Color(66,31,29,255),
             buttonNormalColor = new Color(148, 52, 24, 255),
             buttonDisabledColor = new Color(113, 66, 36, 255),
@@ -41,6 +41,7 @@ public static class SampleThemes
         return new DMGUITheme()
         {
             backgroundColor = Color.White,
+            foregroundColor = new Color(41, 179, 214, 255),
             panelColor =  Color.White,
             buttonNormalColor =  Color.White,
             buttonDisabledColor = new Color(169, 169, 169, 255),
