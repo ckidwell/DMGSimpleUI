@@ -18,12 +18,11 @@ public class SampleSpriteLoader
     {
         background = Content.Load<Texture2D>("SampleSprites/tui_background"); 
         exitText = Content.Load<Texture2D>("SampleSprites/tui_exit");
-        playText = Content.Load<Texture2D>("SampleSprites/tui_gametitle");
-        gameTitle = Content.Load<Texture2D>("SampleSprites/tui_menubar");
+        playText = Content.Load<Texture2D>("SampleSprites/tui_play");
+        gameTitle = Content.Load<Texture2D>("SampleSprites/tui_gametitle");
         menuBar = Content.Load<Texture2D>("SampleSprites/tui_play");
         playGameButton = Content.Load<Texture2D>("SampleSprites/tui_playgame");
-        playGameButton = Content.Load<Texture2D>("SampleSprites/tui_quitgame");
-        playGameButton = Content.Load<Texture2D>("SampleSprites/tui_settings");
-       
+        quitGameButton = Content.Load<Texture2D>("SampleSprites/tui_quitgame");
+        settingsButton = Content.Load<Texture2D>("SampleSprites/tui_settings");
     }
 }

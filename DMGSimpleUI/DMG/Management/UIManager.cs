@@ -19,6 +19,7 @@ public class UIManager
     // UI Samples
     private MenuBarSample _menuBarSample;
     private MainMenuSample _mainMenuSample;
+    private SpriteMainMenuSample _spriteMainMenuSample;
     private SampleSceneNavigator _sampleSceneNavigator = new SampleSceneNavigator();
     
     // Delegate for active UI 
@@ -47,7 +48,7 @@ public class UIManager
         _graphics = graphics;
         
         
-        DMGUIGlobals.Bounds = new(1280, 720);
+        DMGUIGlobals.Bounds = new(640, 480);
         
         _dmgCanvas = new(_graphics.GraphicsDevice,
             DMGUIGlobals.Bounds.X,
@@ -67,11 +68,12 @@ public class UIManager
 
     private void SampleItemsInit()
     {
+        _spriteMainMenuSample = new SpriteMainMenuSample(_theme);
         _menuBarSample = new MenuBarSample(_theme);
         _mainMenuSample = new MainMenuSample(_theme);
 
-        _drawActiveUiDelegate = _mainMenuSample.Draw;
-        _updateActiveUiDelegate = _mainMenuSample.Update;
+        _drawActiveUiDelegate = _spriteMainMenuSample.Draw;
+        _updateActiveUiDelegate = _spriteMainMenuSample.Update;
          
         // _drawActiveUi = _menuBarSample.Draw;
         // _updateActiveUi = _menuBarSample.Update;
@@ -133,7 +135,7 @@ public class UIManager
 
     public void ProcessInput()
     {
-        if (DMGUIGlobals.IsKeyPressed(Keys.F1)) SetResolution(1280, 720);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F1)) SetResolution(640, 480);
         if (DMGUIGlobals.IsKeyPressed(Keys.F2)) SetResolution(1920, 1080);
         if (DMGUIGlobals.IsKeyPressed(Keys.F3)) SetResolution(1400, 900);
         if (DMGUIGlobals.IsKeyPressed(Keys.F4)) SetResolution(800, 1280);

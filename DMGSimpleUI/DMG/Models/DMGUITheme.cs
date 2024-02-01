@@ -13,5 +13,4 @@ public class DMGUITheme
     public Color fontColor;
     public Color fontHoverColor;
     public Color fontDisabledColor;
-    
 }
