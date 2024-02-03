@@ -1,18 +1,30 @@
-#DMG Simple UI
+# DMG Simple UI
 
 A simple UI implementation for Monogame projects by DOOM METAL GAMES.
 
-###Features:
-Supports primitives of Panels, Buttons, Text, and Scenes
-Themeable
-Transitions between 
-
 This is a fairly light UI Library for Monogame. The idea is to supply very basic functionality and primitives and leave much of specifics to your game you are implementing.
+
+### Features:
+
+1. Supports primitives of :
+ - Panels
+ - Buttons
+ - Text
+ - Scenes
+2. Themeable
+3. Transitions
+   - Wipes - UP, DOWN, LEFT, RIGHT
+   - Fade In/Out 
+
+
+
+Here is a GIF demonstrated a Sprite Based UI theme with a WIPE_RIGHT transition to a scene with a menu bar and then navigate back
+![sprite_anim_demo2](https://github.com/ckidwell/DMGSimpleUI/assets/3445949/440404c9-24d0-47c4-a809-28df993af4e3)
 
 
 Here is a sample of a Dark theme:
 
-`
+```
   new DMGUITheme()
   {
       backgroundColor = new Color(3, 4, 6, 255),
@@ -25,13 +37,13 @@ Here is a sample of a Dark theme:
       fontHoverColor = new Color(109,156,249,255),
       fontDisabledColor = new Color(111,130,130,255),
   };
-`
+```
 
 ![darktheme_sample](https://github.com/ckidwell/DMGSimpleUI/assets/3445949/ba3fcb1e-9c1f-47bd-bc31-124e81a640aa)
 
 Here is a sample of a Orange/Fire theme:
 
-`
+```
 new DMGUITheme()
   {
       backgroundColor = new Color(45, 26, 26, 255),
@@ -45,9 +57,35 @@ new DMGUITheme()
       fontDisabledColor = new Color(196,180,157,255),
   };
 
-`
+```
 ![firetheme_sample](https://github.com/ckidwell/DMGSimpleUI/assets/3445949/4c651fa2-8b45-428f-90f1-0ceb1f4282ac)
 
-And finally a sample of  Sprite based theme ; the theme file itself would be Color.White for most of the colors so the sprite is not tinted:
+A sample of  Sprite based theme ; the theme file itself would be Color.White for most of the colors so the sprite is not tinted:
+
+
 
 ![spritedthemed_sample](https://github.com/ckidwell/DMGSimpleUI/assets/3445949/99154c21-2669-48c6-bb66-8fe7b3e0ab04)
+
+
+
+## Transition
+Transitions can be called with a small snippet of code, implementation example included.  You should have a UI element in front of all other elements, referred here as a foreground element to mask what is being drawn behind it.
+
+
+```
+ var transition = new DMGTransition()
+        {
+            TransitionType = DMGTransitionType.FADE_IN,
+            theme = _theme,
+            duration = 2f,
+            nextScene = SceneTypes.MENU_BAR_THEMED,
+            _uiElement = foreground,
+        };
+```
+
+The resulting animation:
+
+![fade_in](https://github.com/ckidwell/DMGSimpleUI/assets/3445949/ad0f55f4-cf46-4b2c-b5bf-b7ce3b98bd77)
+
+Transitions are implemented with Monogame.Extended.Tween library so you can customize with differnt EasingFunctions
+
