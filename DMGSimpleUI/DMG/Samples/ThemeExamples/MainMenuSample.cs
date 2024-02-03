@@ -29,25 +29,25 @@ public class MainMenuSample : DMGScene
         
         background = new DMGPanel(backgroundTexture, new(0, 0),
             DMGUIGlobals.UIFont,_theme,
-            new Point(DMGUIGlobals.Bounds.X, DMGUIGlobals.Bounds.Y), "BACKGROUND PANEL..");
+            new Point(DMGUIGlobals.Bounds.X, DMGUIGlobals.Bounds.Y), string.Empty);
         foreground = new DMGPanel(backgroundTexture, new(0, 0),
             DMGUIGlobals.UIFont,_theme,
-            new Point(DMGUIGlobals.Bounds.X, DMGUIGlobals.Bounds.Y), "                                             FOREGROUND PANEL..", Color.Transparent);
+            new Point(DMGUIGlobals.Bounds.X, DMGUIGlobals.Bounds.Y), string.Empty, Color.Transparent);
         
         // ReSharper disable once PossibleLossOfFraction
         var H_CENTER = (float)(DMGUIGlobals.Bounds.Y / 2) ;
         var V_CENTER = (float)DMGUIGlobals.Bounds.X / 2;
         
-        background.AddChild(new DMGPanel(backgroundTexture, new(540, 325),
+        background.AddChild(new DMGPanel(backgroundTexture, new((int)(V_CENTER - 64), (int)H_CENTER - 80),
             DMGUIGlobals.UIFont,_theme,
-            new Point(25, 25), "MAIN MENU PANEL"));
-        background.AddChild( new DMGButton(t, new Vector2(V_CENTER -64, H_CENTER),
+            new Point(55, 55), "GAME TITLE"));
+        background.AddChild( new DMGButton(t, new Vector2(V_CENTER -64, H_CENTER - 35),
             _theme,
             DMGUIGlobals.UIFont, "PLAY GAME")).OnClick += OnPlayGame;
-        background.AddChild(new DMGButton(t, new Vector2(V_CENTER -64, H_CENTER +35),
+        background.AddChild(new DMGButton(t, new Vector2(V_CENTER -64, H_CENTER),
             _theme,
             DMGUIGlobals.UIFont, "SETTINGS")).OnClick += OnSettings;
-        background.AddChild(new DMGButton(t, new Vector2(V_CENTER -64, H_CENTER +70),
+        background.AddChild(new DMGButton(t, new Vector2(V_CENTER -64, H_CENTER  +35),
             _theme,
             DMGUIGlobals.UIFont, "QUIT GAME")).OnClick += OnQuit;
         
@@ -72,7 +72,7 @@ public class MainMenuSample : DMGScene
 
     private void OnSettings(object sender, EventArgs e)
     {
-        
+        // NOT IMPLEMENTED
     }
 
     private void OnQuit(object sender, EventArgs e)

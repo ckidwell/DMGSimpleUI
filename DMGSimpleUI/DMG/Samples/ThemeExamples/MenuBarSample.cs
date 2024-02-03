@@ -32,15 +32,11 @@ public class MenuBarSample : DMGScene
         foreground = new DMGPanel(backgroundTexture, new(0, 0),
             DMGUIGlobals.UIFont,_theme,
             new Point(DMGUIGlobals.Bounds.X, DMGUIGlobals.Bounds.Y),"", Color.Transparent);
-
         
         _elements.Add(e);
         
-        e.AddChild(new DMGButton(t,new(65, 2),_theme ,DMGUIGlobals.UIFont,"NEW")).OnClick += OnNew;
-        e.AddChild(new DMGButton(t,new(t.Width + 65, 2),_theme ,DMGUIGlobals.UIFont,"TEST1")).OnClick += OnTest1;
-        e.AddChild(new DMGButton(t,new(t.Width * 2 + 65, 2),_theme ,DMGUIGlobals.UIFont,"TEST2")).OnClick += OnTest2;
-        // e.AddChild(new DMGButton(t,new(t.Width * 3 + 65, 2),DMGUIGlobals.UIFont,"GRID")).OnClick += CreateGrid;
-        // e.AddChild(new DMGButton(t,new(t.Width * 4 + 65, 2),DMGUIGlobals.UIFont,"AUTOMAP")).OnClick += AutoMap;
+        e.AddChild(new DMGButton(t,new(65, 2),_theme ,DMGUIGlobals.UIFont,"MENU")).OnClick += OnMenu;
+        e.AddChild(new DMGButton(t,new(t.Width + 65, 2),_theme ,DMGUIGlobals.UIFont,"SETTINGS")).OnClick += OnSettings;
         e.AddChild(new DMGButton(t,new(DMGUIGlobals.Bounds.X - 129, 2),_theme ,DMGUIGlobals.UIFont,"EXIT")).OnClick += Quit;
         e.AddChild(new DMGPanel(t,
             new(0, DMGUIGlobals.Bounds.Y -36),
@@ -50,7 +46,7 @@ public class MenuBarSample : DMGScene
         e.AddChild(foreground);
     }
     
-    private void OnNew(object sender, EventArgs e)
+    private void OnMenu(object sender, EventArgs e)
     {
         var transition = new DMGTransition()
         {
@@ -63,14 +59,11 @@ public class MenuBarSample : DMGScene
         ScreenTransition?.Invoke(transition);
     }
 
-    private void OnTest1(object sender, EventArgs e)
+    private void OnSettings(object sender, EventArgs e)
     {
-        
+        // Not Implemented
     }
-    private void OnTest2(object sender, EventArgs e)
-    {
-        
-    }
+
 
 
     private void Quit(object sender, EventArgs e)
