@@ -14,7 +14,9 @@ This is a fairly light UI Library for Monogame. The idea is to supply very basic
 2. Themeable
 3. Transitions
    - Wipes - UP, DOWN, LEFT, RIGHT
-   - Fade In/Out 
+   - Fade In/Out
+4. Render Target Size
+   - Set a target size to design to and then scale the draging via Render Target
 
 
 
@@ -89,3 +91,10 @@ The resulting animation:
 
 Transitions are implemented with Monogame.Extended.Tween library so you can customize with differnt EasingFunctions
 
+## Render Target
+
+Press F1-F5 to toggle between a few sample hard coded resolutions to demonstrate render target functionality. You will want to create your own code to either require certain resolutions or detect the users resolution and adjust to it.
+
+**NOTE** Currently there is a bug where render targets that are very extended that display black letterboxing for scaling cause the intersecction of cursor over UI elements to be skewed so that the larger the letterbox is the more skewed the UI element is in the same axis as the letterboxing. In extreme cases this can result in the clickable area of a button being  completely outside of a buttons actual visible area.
+
+![render_target](https://github.com/ckidwell/DMGSimpleUI/assets/3445949/354ccff3-8fd7-43dd-8f84-ba3dd217142c)
