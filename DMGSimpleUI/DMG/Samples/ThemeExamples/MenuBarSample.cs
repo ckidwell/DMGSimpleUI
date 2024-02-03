@@ -4,7 +4,7 @@ using DMGSimpleUI.DMG.Elements;
 using DMGSimpleUI.DMG.Management;
 using DMGSimpleUI.DMG.Models;
 
-namespace DMGSimpleUI.DMG.Samples;
+namespace DMGSimpleUI.DMG.Samples.ThemeExamples;
 
 public class MenuBarSample : DMGScene
 {
@@ -13,7 +13,7 @@ public class MenuBarSample : DMGScene
     private Texture2D backgroundTexture;
     private DMGPanel foreground;
     public static Action<DMGTransition> ScreenTransition;
-    private SceneTypes _sceneTypes = SceneTypes.MENU_BAR;
+    private SceneTypes _sceneTypes = SceneTypes.MENU_BAR_THEMED;
     private DMGUITheme _theme;
 
     
@@ -57,7 +57,7 @@ public class MenuBarSample : DMGScene
             TransitionType = DMGTransitionType.WIPE_RIGHT,
             theme = _theme,
             duration = 2f,
-            nextScene = SceneTypes.MAIN_MENU,
+            nextScene = SceneTypes.MAIN_MENU_THEMED,
             _uiElement = foreground,
         };
         ScreenTransition?.Invoke(transition);

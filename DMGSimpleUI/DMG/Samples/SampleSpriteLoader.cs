@@ -20,7 +20,7 @@ public class SampleSpriteLoader
         exitText = Content.Load<Texture2D>("SampleSprites/tui_exit");
         playText = Content.Load<Texture2D>("SampleSprites/tui_play");
         gameTitle = Content.Load<Texture2D>("SampleSprites/tui_gametitle");
-        menuBar = Content.Load<Texture2D>("SampleSprites/tui_play");
+        menuBar = Content.Load<Texture2D>("SampleSprites/tui_menubar");
         playGameButton = Content.Load<Texture2D>("SampleSprites/tui_playgame");
         quitGameButton = Content.Load<Texture2D>("SampleSprites/tui_quitgame");
         settingsButton = Content.Load<Texture2D>("SampleSprites/tui_settings");

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using DMGSimpleUI.DMG.Elements;
 using DMGSimpleUI.DMG.Models;
 using DMGSimpleUI.DMG.Samples;
+using DMGSimpleUI.DMG.Samples.SpriteExample;
+using DMGSimpleUI.DMG.Samples.ThemeExamples;
 
 namespace DMGSimpleUI.DMG.Management;
 
@@ -19,7 +21,10 @@ public class UIManager
     // UI Samples
     private MenuBarSample _menuBarSample;
     private MainMenuSample _mainMenuSample;
+    
     private SpriteMainMenuSample _spriteMainMenuSample;
+    private SpriteMenuBarSample _spriteMenuBarSample;
+    
     private SampleSceneNavigator _sampleSceneNavigator = new SampleSceneNavigator();
     
     // Delegate for active UI 
@@ -69,6 +74,7 @@ public class UIManager
     private void SampleItemsInit()
     {
         _spriteMainMenuSample = new SpriteMainMenuSample(_theme);
+        _spriteMenuBarSample = new SpriteMenuBarSample(_theme);
         _menuBarSample = new MenuBarSample(_theme);
         _mainMenuSample = new MainMenuSample(_theme);
 
@@ -81,8 +87,10 @@ public class UIManager
         MenuBarSample.QuitGame += OnQuitGame;
         MainMenuSample.QuitGame += OnQuitGame;
         SpriteMainMenuSample.QuitGame += OnQuitGame;
+        SpriteMenuBarSample.QuitGame += OnQuitGame;
         MainMenuSample.ScreenTransition += OnScreenTransition;
         SpriteMainMenuSample.ScreenTransition += OnScreenTransition;
+        SpriteMenuBarSample.ScreenTransition += OnScreenTransition;
         MenuBarSample.ScreenTransition += OnScreenTransition;
          
         DMGUIGlobals.AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
@@ -174,8 +182,10 @@ public class UIManager
     {
         return scene switch
         {
-            SceneTypes.MAIN_MENU => _mainMenuSample,
-            SceneTypes.MENU_BAR => _menuBarSample,
+            SceneTypes.MAIN_MENU_THEMED => _mainMenuSample,
+            SceneTypes.MENU_BAR_THEMED => _menuBarSample,
+            SceneTypes.MAIN_MENU_SPRITE => _spriteMainMenuSample,
+            SceneTypes.MENU_BAR_SPRITE => _spriteMenuBarSample,
             _ => throw new ArgumentException("Invalid scene type"),
         };
     }
