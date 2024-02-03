@@ -20,6 +20,7 @@ public static class SampleThemes
             fontDisabledColor = new Color(111,130,130,255),
         };
     }
+
     public static DMGUITheme GetFireTheme()
     {
         return new DMGUITheme()
@@ -33,22 +34,21 @@ public static class SampleThemes
             fontColor = new Color(187, 60, 15, 255),
             fontHoverColor = new Color(249, 160, 31, 255),
             fontDisabledColor = new Color(196,180,157,255),
-
         };
     }
     public static DMGUITheme GetTexturedTheme()
     {
         return new DMGUITheme()
         {
-            backgroundColor = new Color(255, 255, 0, 255),
-            panelColor =  new Color(255,255,255,255),
-            buttonNormalColor =  new Color(255,255,255,255),
+            backgroundColor = new Color(41, 179, 214, 255),
+            foregroundColor = new Color(51, 189, 204, 255),
+            panelColor =  Color.White,
+            buttonNormalColor =  Color.White,
             buttonDisabledColor = new Color(169, 169, 169, 255),
-            buttonHoverOverColor =  new Color(237,237,237,255),
-            fontColor = new Color(0, 0, 0, 255),
-            fontHoverColor =  new Color(0, 0, 0, 255),
-            fontDisabledColor = new Color(0, 0, 0, 255),
-
+            buttonHoverOverColor =  new Color(210,210,210,255),
+            fontColor = new Color(128, 128, 128, 255),
+            fontHoverColor =  new Color(128, 128, 128, 255),
+            fontDisabledColor = new Color(128, 128, 128, 255),
         };
     }
 }

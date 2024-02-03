@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using DMGSimpleUI.DMG.Elements;
 using DMGSimpleUI.DMG.Models;
 using DMGSimpleUI.DMG.Samples;
+using DMGSimpleUI.DMG.Samples.SpriteExample;
+using DMGSimpleUI.DMG.Samples.ThemeExamples;
 
 namespace DMGSimpleUI.DMG.Management;
 
@@ -19,6 +21,10 @@ public class UIManager
     // UI Samples
     private MenuBarSample _menuBarSample;
     private MainMenuSample _mainMenuSample;
+    
+    private SpriteMainMenuSample _spriteMainMenuSample;
+    private SpriteMenuBarSample _spriteMenuBarSample;
+    
     private SampleSceneNavigator _sampleSceneNavigator = new SampleSceneNavigator();
     
     // Delegate for active UI 
@@ -47,7 +53,7 @@ public class UIManager
         _graphics = graphics;
         
         
-        DMGUIGlobals.Bounds = new(1280, 720);
+        DMGUIGlobals.Bounds = new(640, 480);
         
         _dmgCanvas = new(_graphics.GraphicsDevice,
             DMGUIGlobals.Bounds.X,
@@ -67,23 +73,29 @@ public class UIManager
 
     private void SampleItemsInit()
     {
+        _spriteMainMenuSample = new SpriteMainMenuSample(_theme);
+        _spriteMenuBarSample = new SpriteMenuBarSample(_theme);
         _menuBarSample = new MenuBarSample(_theme);
         _mainMenuSample = new MainMenuSample(_theme);
 
-        _drawActiveUiDelegate = _mainMenuSample.Draw;
-        _updateActiveUiDelegate = _mainMenuSample.Update;
+        _drawActiveUiDelegate = _spriteMainMenuSample.Draw;
+        _updateActiveUiDelegate = _spriteMainMenuSample.Update;
          
         // _drawActiveUi = _menuBarSample.Draw;
         // _updateActiveUi = _menuBarSample.Update;
         
         MenuBarSample.QuitGame += OnQuitGame;
         MainMenuSample.QuitGame += OnQuitGame;
+        SpriteMainMenuSample.QuitGame += OnQuitGame;
+        SpriteMenuBarSample.QuitGame += OnQuitGame;
         MainMenuSample.ScreenTransition += OnScreenTransition;
+        SpriteMainMenuSample.ScreenTransition += OnScreenTransition;
+        SpriteMenuBarSample.ScreenTransition += OnScreenTransition;
         MenuBarSample.ScreenTransition += OnScreenTransition;
          
         DMGUIGlobals.AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
         //SetResolution(DMGUIGlobals.Bounds.X,DMGUIGlobals.Bounds.Y);
-        SetResolution(1280,720);
+        SetResolution(640,480);
     }
     
     private void SetResolution(int height, int width)
@@ -133,7 +145,7 @@ public class UIManager
 
     public void ProcessInput()
     {
-        if (DMGUIGlobals.IsKeyPressed(Keys.F1)) SetResolution(1280, 720);
+        if (DMGUIGlobals.IsKeyPressed(Keys.F1)) SetResolution(640, 480);
         if (DMGUIGlobals.IsKeyPressed(Keys.F2)) SetResolution(1920, 1080);
         if (DMGUIGlobals.IsKeyPressed(Keys.F3)) SetResolution(1400, 900);
         if (DMGUIGlobals.IsKeyPressed(Keys.F4)) SetResolution(800, 1280);
@@ -170,8 +182,10 @@ public class UIManager
     {
         return scene switch
         {
-            SceneTypes.MAIN_MENU => _mainMenuSample,
-            SceneTypes.MENU_BAR => _menuBarSample,
+            SceneTypes.MAIN_MENU_THEMED => _mainMenuSample,
+            SceneTypes.MENU_BAR_THEMED => _menuBarSample,
+            SceneTypes.MAIN_MENU_SPRITE => _spriteMainMenuSample,
+            SceneTypes.MENU_BAR_SPRITE => _spriteMenuBarSample,
             _ => throw new ArgumentException("Invalid scene type"),
         };
     }
@@ -207,7 +221,6 @@ public class UIManager
             {
                 _sampleSceneNavigator.Draw(DMGUIGlobals.SpriteBatch);
             }
-           
         }
         DMGUIGlobals.SpriteBatch.End();
         

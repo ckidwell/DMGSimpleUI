@@ -2,7 +2,6 @@
 using DMGSimpleUI.DMG.Models;
 using DMGSimpleUI.DMG.Samples;
 
-
 namespace DMGSimpleUI;
 
 public class Game1 : Game
@@ -25,9 +24,8 @@ public class Game1 : Game
         DMGUIGlobals.Content = Content;
         DMGUIGlobals.GraphicsDeviceManager = _graphics;
         
-        _theme = SampleThemes.GetFireTheme();
-        _uiManager = new UIManager(this,_graphics,_theme);
-        
+        _theme = SampleThemes.GetTexturedTheme();
+
         //_graphics.ApplyChanges();
 
         base.Initialize();
@@ -37,6 +35,8 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         DMGUIGlobals.SpriteBatch = _spriteBatch;
+        SampleSpriteLoader.LoadSampleSprites(Content);
+        _uiManager = new UIManager(this,_graphics,_theme);
     }
 
     protected override void Update(GameTime gameTime)
