@@ -8,7 +8,7 @@ namespace DMGSimpleUI.DMG.Samples.SpriteExample;
 
 public class SpriteMenuBarSample : DMGScene
 {
-     public static Action QuitGame;
+    public static Action QuitGame;
     private readonly List<BaseUIElement> _elements = new();
     private Texture2D backgroundTexture;
     private DMGPanel foreground;
@@ -32,13 +32,11 @@ public class SpriteMenuBarSample : DMGScene
         foreground = new DMGPanel(backgroundTexture, new(0, 0),
             DMGUIGlobals.UIFont,_theme,
             new Point(DMGUIGlobals.Bounds.X, DMGUIGlobals.Bounds.Y),"", Color.Transparent);
-
         
         _elements.Add(e);
         
-        e.AddChild(new DMGButton(t,new(65, 2),_theme ,DMGUIGlobals.UIFont,"NEW")).OnClick += OnNew;
-        e.AddChild(new DMGButton(t,new(t.Width + 65, 2),_theme ,DMGUIGlobals.UIFont,"TEST1")).OnClick += OnTest1;
-        e.AddChild(new DMGButton(t,new(t.Width * 2 + 65, 2),_theme ,DMGUIGlobals.UIFont,"TEST2")).OnClick += OnTest2;
+        e.AddChild(new DMGButton(SampleSpriteLoader.menuText,new(65, 9),_theme ,DMGUIGlobals.UIFont,string.Empty)).OnClick += OnMenu;
+        e.AddChild(new DMGButton(SampleSpriteLoader.settingsText,new(t.Width + 45, 9),_theme ,DMGUIGlobals.UIFont,string.Empty)).OnClick += OnSettings;
         e.AddChild(new DMGButton(SampleSpriteLoader.exitText,new(DMGUIGlobals.Bounds.X - 129, 9),_theme ,DMGUIGlobals.UIFont,string.Empty)).OnClick += Quit;
         e.AddChild(new DMGPanel(SampleSpriteLoader.menuBar,
             new(0, DMGUIGlobals.Bounds.Y -36),
@@ -48,7 +46,7 @@ public class SpriteMenuBarSample : DMGScene
         e.AddChild(foreground);
     }
     
-    private void OnNew(object sender, EventArgs e)
+    private void OnMenu(object sender, EventArgs e)
     {
         var transition = new DMGTransition()
         {
@@ -61,16 +59,11 @@ public class SpriteMenuBarSample : DMGScene
         ScreenTransition?.Invoke(transition);
     }
 
-    private void OnTest1(object sender, EventArgs e)
+    private void OnSettings(object sender, EventArgs e)
     {
-        
+        // Not Implemented
     }
-    private void OnTest2(object sender, EventArgs e)
-    {
-        
-    }
-
-
+  
     private void Quit(object sender, EventArgs e)
     {
         QuitGame?.Invoke();
