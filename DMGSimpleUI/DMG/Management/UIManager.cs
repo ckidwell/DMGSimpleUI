@@ -77,12 +77,10 @@ public class UIManager
         _spriteMenuBarSample = new SpriteMenuBarSample(_theme);
         _menuBarSample = new MenuBarSample(_theme);
         _mainMenuSample = new MainMenuSample(_theme);
-
-        _drawActiveUiDelegate = _spriteMainMenuSample.Draw;
-        _updateActiveUiDelegate = _spriteMainMenuSample.Update;
-         
-        // _drawActiveUi = _menuBarSample.Draw;
-        // _updateActiveUi = _menuBarSample.Update;
+        
+        // Change what Classes these point to to change your UI
+        _drawActiveUiDelegate = _mainMenuSample.Draw;
+        _updateActiveUiDelegate = _mainMenuSample.Update;
         
         MenuBarSample.QuitGame += OnQuitGame;
         MainMenuSample.QuitGame += OnQuitGame;
