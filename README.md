@@ -18,6 +18,13 @@ This is a fairly light UI Library for Monogame. The idea is to supply very basic
 4. Render Target Size
    - Set a target size to design to and then scale the draging via Render Target
 
+## Samples / Demo Implementations:
+
+You can find some sample implementations in the project under DMGSimpleUI\DMG\Samples\
+- DMGSimpleUI\DMG\Samples\SpriteExample contains two classes that use Texture2D's to implement the UI
+- DMGSimpleUI\DMG\Samples\ThemeExamples contains two classes that use Texture2D's to implement the UI
+  
+In the root Sampmles folder you wlil find a SampleSceneNavigator that uses Delegates to swap themes in conjunction with the DMGTransition class, as well as a SampleTheme class that contains the samples that are demonstrated below.
 
 
 Here is a GIF demonstrated a Sprite Based UI theme with a WIPE_RIGHT transition to a scene with a menu bar and then navigate back
