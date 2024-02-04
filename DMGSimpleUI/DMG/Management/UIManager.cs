@@ -14,10 +14,6 @@ public class UIManager
     private SpriteFont Font { get; }
     private readonly List<BaseUIElement> _elements = new();
     
-    // private UIAlertMessage infoMessage = new UIAlertMessage{message = String.Empty, color = Color.White };
-    // private Dictionary<int, UIAlertMessage> UIAlertMessages = new Dictionary<int, UIAlertMessage>();
-    // private int messageCount = 0;
-    
     // UI Samples
     private MenuBarSample _menuBarSample;
     private MainMenuSample _mainMenuSample;
@@ -125,10 +121,8 @@ public class UIManager
         var divided_height = r_target_height / display_mode_height;
 
        // BUG: This cursor scaling works well UNTIL we have excessive letterboxing
-       // at such time it starts stretching the coordinates to the real screen,
-       // not the rendered bit inside the letterboxing
-       // did some googling - not sure on how to solve this yet
-       // problem occurs for both vertical and horizontal letterboxing
+       // https://github.com/ckidwell/DMGSimpleUI/issues/5
+
        
         CursorScaling = new Vector2(divided_width, divided_height);
         
