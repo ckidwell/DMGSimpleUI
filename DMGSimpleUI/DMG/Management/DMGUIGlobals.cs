@@ -29,6 +29,7 @@ public static class DMGUIGlobals
     private static Dictionary<int, UIAlertMessage> UIAlertMessages = new Dictionary<int, UIAlertMessage>();
     private static int messageCount = 0;
 
+    public static Vector2 CursorScaling;
     
     public static void Update(GameTime gt)
     {
@@ -47,7 +48,7 @@ public static class DMGUIGlobals
 
     private static Point MouseToCursorScaling()
     {
-        var cursorPosition = MouseState.Position.ToVector2() * UIManager.CursorScaling;
+        var cursorPosition = MouseState.Position.ToVector2() * CursorScaling;
         return new Point((int)cursorPosition.X, (int)cursorPosition.Y);
     }
   
