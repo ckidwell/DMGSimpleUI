@@ -51,7 +51,8 @@ public static class DMGUIGlobals
         var cursorPosition = MouseState.Position.ToVector2() * CursorScaling;
         return new Point((int)cursorPosition.X, (int)cursorPosition.Y);
     }
-  
+
+
     public static bool IsKeyPressed(Keys key)
     {
         return _currentKeyboard.IsKeyDown(key) && _lastKeyboard.IsKeyUp(key);
