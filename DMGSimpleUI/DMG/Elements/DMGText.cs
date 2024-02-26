@@ -18,7 +18,7 @@ public class DMGText: BaseUIElement
         var _childrenSpan = CollectionsMarshal.AsSpan(_children);
         for (var i = 0; i < _childrenSpan.Length; i++)
         {
-            _childrenSpan[i].Draw();
+            _childrenSpan[i].Update();
         }
     }
 
