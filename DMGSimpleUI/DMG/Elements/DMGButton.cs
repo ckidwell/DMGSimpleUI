@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using DMGSimpleUI.DMG.Management;
 using DMGSimpleUI.DMG.Models;
 
@@ -25,11 +26,6 @@ public class DMGButton: BaseUIElement
 
         _font = f;
         _interactable = true;
-    
-        // ReSharper disable once PossibleLossOfFraction
-        //screenWidthAdjustment = DMGUIGlobals.Bounds.X / 2 - t.Width ;
-        // ReSharper disable once PossibleLossOfFraction
-        //screenHeightAdjustment = DMGUIGlobals.Bounds.Y / 2 - (t.Height * 4.2);
         
         leftTextPadding = (int) (t.Width * .1);
         topleftTextPadding = (int) (t.Height *.34 );
@@ -68,19 +64,21 @@ public class DMGButton: BaseUIElement
                     worldPosition.Y - _origin.Y +topleftTextPadding),
                 _fontCurrentColor);
         }
-        
-        foreach (var e in _children)
+        var _childrenSpan = CollectionsMarshal.AsSpan(_children);
+        for (var i = 0; i < _childrenSpan.Length; i++)
         {
-            e.Draw();
+            _childrenSpan[i].Draw();
         }
+       
     }
     public override void Update()
     {
         //if (!_interactable) return;
        
-        foreach (var e in _children)
+        var _childrenSpan = CollectionsMarshal.AsSpan(_children);
+        for (var i = 0; i < _childrenSpan.Length; i++)
         {
-            e.Update();
+            _childrenSpan[i].Draw();
         }
         if (DMGUIGlobals.MouseCursor.Intersects(_rect))
         {
@@ -94,8 +92,6 @@ public class DMGButton: BaseUIElement
             _shade = _theme.buttonNormalColor;
         }
     }
-
-    
     
     protected override void Click()
     {

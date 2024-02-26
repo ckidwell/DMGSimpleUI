@@ -67,7 +67,7 @@ public class DMGProgressBar : BaseUIElement
         }
        
     }
-    public void UpdateCurrentValue(float value)
+    public void SetValue(float value)
     {
         _currentVal = value;
     }
@@ -81,21 +81,5 @@ public class DMGProgressBar : BaseUIElement
     {
         return;
     }
-    
-    // public DMGProgressBar(Texture2D t, Vector2 position,DMGUITheme theme, SpriteFont f,Point size, string buttonText = "") : base()
-    // {
-    //     // the clickable area for this works, but the texture is not scaled/sized to visually match
-    //     _theme = theme;
-    //     _color = new Color(77, 77, 77, 255);
-    //     _texture = t;
-    //     _position = position;
-    //     _text = buttonText;
-    //     _origin = new Vector2( 0,0);
-    //     _rect = new Rectangle((int)position.X, (int)position.Y, size.Y, size.X);
-    //     _font = f;
-    //     _interactable = true;
-    //
-    //     leftTextPadding = (int) (t.Width * .1);
-    //     topleftTextPadding = (int) (t.Height *.34 );
-    // }
+
 }

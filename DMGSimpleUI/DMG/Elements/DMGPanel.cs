@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using DMGSimpleUI.DMG.Management;
 using DMGSimpleUI.DMG.Models;
 
@@ -24,9 +25,10 @@ public class DMGPanel : BaseUIElement
 
     public override void Update()
     {
-        foreach (var e in _children)
+        var _childrenSpan = CollectionsMarshal.AsSpan(_children);
+        for (var i = 0; i < _childrenSpan.Length; i++)
         {
-            e.Update();
+            _childrenSpan[i].Draw();
         }
     }
 
@@ -39,12 +41,12 @@ public class DMGPanel : BaseUIElement
         // stretches to specified rect size, may cause artifacts
         DMGUIGlobals.SpriteBatch.Draw(_texture, new Rectangle(new Point((int)worldPosition.X,(int)worldPosition.Y),new Point(_rect.Height,_rect.Width)), _color );
         
-        
         if(_text.Length > 0)DMGUIGlobals.SpriteBatch.DrawString(_font, $"{_text}", new Vector2(worldPosition.X -_origin.X +leftTextPadding, worldPosition.Y - _origin.Y +topleftTextPadding), Color.White);
         
-        foreach (var e in _children)
+        var _childrenSpan = CollectionsMarshal.AsSpan(_children);
+        for (var i = 0; i < _childrenSpan.Length; i++)
         {
-            e.Draw();
+            _childrenSpan[i].Draw();
         }
     }
 }
