@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using DMGSimpleUI.DMG.Management;
 
 namespace DMGSimpleUI.DMG.Elements;
@@ -14,9 +15,10 @@ public class DMGText: BaseUIElement
 
     public override void Update()
     {
-        foreach (var e in _children)
+        var _childrenSpan = CollectionsMarshal.AsSpan(_children);
+        for (var i = 0; i < _childrenSpan.Length; i++)
         {
-            e.Update();
+            _childrenSpan[i].Update();
         }
     }
 
@@ -27,9 +29,10 @@ public class DMGText: BaseUIElement
             new Vector2(_position.X -_origin.X +leftTextPadding, _position.Y - _origin.Y +topleftTextPadding), 
             Color.White);
         
-        foreach (var e in _children)
+        var _childrenSpan = CollectionsMarshal.AsSpan(_children);
+        for (var i = 0; i < _childrenSpan.Length; i++)
         {
-            e.Draw();
+            _childrenSpan[i].Draw();
         }
     } 
     

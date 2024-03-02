@@ -14,7 +14,7 @@ public static class DMGUIGlobals
     public static Point Bounds { get; set; }
     public static SpriteFont UIFont { get; set; }
     public static GraphicsDeviceManager GraphicsDeviceManager { get; set; }
- 
+    public static DMGUITheme Theme { get; set; }
     // Mouse Handling
     public static MouseState MouseState;
     public static MouseState LastMouseState;

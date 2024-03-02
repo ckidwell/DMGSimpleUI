@@ -16,6 +16,11 @@ public class SpriteMenuBarSample : DMGScene
     private SceneTypes _sceneTypes = SceneTypes.MENU_BAR_THEMED;
     private DMGUITheme _theme;
 
+    // healthbar animations
+    private DMGProgressBar healthBar;
+    private float healthBarPercentage = 1f;
+    private bool ascending = false;
+    private float speed = 15f;
     
     public SpriteMenuBarSample(DMGUITheme theme)
     {
@@ -28,12 +33,22 @@ public class SpriteMenuBarSample : DMGScene
             _theme, 
             new Point(DMGUIGlobals.Bounds.X,36),
             string.Empty);
-        
+        healthBar = new DMGProgressBar(SampleSpriteLoader.healthBar,
+            SampleSpriteLoader.healthBar,
+            new Vector2(1, 40),
+            Color.White,
+            Color.Black,
+            1.0f,
+            theme, 
+            DMGUIGlobals.UIFont, 
+            "");
+        healthBar.SetValue(1f);
         foreground = new DMGPanel(backgroundTexture, new(0, 0),
             DMGUIGlobals.UIFont,_theme,
             new Point(DMGUIGlobals.Bounds.X, DMGUIGlobals.Bounds.Y),"", Color.Transparent);
         
         _elements.Add(e);
+        _elements.Add(healthBar);
         
         e.AddChild(new DMGButton(SampleSpriteLoader.menuText,new(65, 9),_theme ,DMGUIGlobals.UIFont,string.Empty)).OnClick += OnMenu;
         e.AddChild(new DMGButton(SampleSpriteLoader.settingsText,new(t.Width + 45, 9),_theme ,DMGUIGlobals.UIFont,string.Empty)).OnClick += OnSettings;
@@ -43,6 +58,7 @@ public class SpriteMenuBarSample : DMGScene
             DMGUIGlobals.UIFont,_theme,
             new Point(DMGUIGlobals.Bounds.X,36),
             "INFO:"));
+       
         e.AddChild(foreground);
     }
     
@@ -76,6 +92,30 @@ public class SpriteMenuBarSample : DMGScene
         {
             item.Update();
         }
+
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (ascending)
+        {
+            healthBarPercentage += .1f * speed * DMGUIGlobals.TotalSeconds;    
+            if (healthBarPercentage > 1.00f)
+            {
+                ascending = false;
+            }
+        }
+        else
+        {
+            healthBarPercentage -= .1f * speed * DMGUIGlobals.TotalSeconds;
+            if (healthBarPercentage <= .01f)
+            {
+                ascending = true;
+            }
+        }
+        healthBar.SetValue(healthBarPercentage);
+
     }
 
     public override void Draw()
