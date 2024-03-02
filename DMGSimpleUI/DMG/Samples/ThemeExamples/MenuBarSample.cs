@@ -20,6 +20,7 @@ public class MenuBarSample : DMGScene
     private DMGProgressBar healthBar;
     private float healthBarPercentage = 1f;
     private bool ascending = false;
+    private float speed = 15f;
     
     public MenuBarSample(DMGUITheme theme)
     {
@@ -99,7 +100,7 @@ public class MenuBarSample : DMGScene
     {
         if (ascending)
         {
-            healthBarPercentage += .01f;    
+            healthBarPercentage += .1f * speed * DMGUIGlobals.TotalSeconds;    
             if (healthBarPercentage > 1.00f)
             {
                 ascending = false;
@@ -107,7 +108,7 @@ public class MenuBarSample : DMGScene
         }
         else
         {
-            healthBarPercentage -= .01f;
+            healthBarPercentage -= .1f * speed * DMGUIGlobals.TotalSeconds;
             if (healthBarPercentage <= .01f)
             {
                 ascending = true;

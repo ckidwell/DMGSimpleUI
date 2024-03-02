@@ -20,6 +20,7 @@ public class SpriteMenuBarSample : DMGScene
     private DMGProgressBar healthBar;
     private float healthBarPercentage = 1f;
     private bool ascending = false;
+    private float speed = 15f;
     
     public SpriteMenuBarSample(DMGUITheme theme)
     {
@@ -32,7 +33,15 @@ public class SpriteMenuBarSample : DMGScene
             _theme, 
             new Point(DMGUIGlobals.Bounds.X,36),
             string.Empty);
-        healthBar = new DMGProgressBar(t, t, new Vector2(1, 24),Color.Red,Color.Black, 1.0f, theme, DMGUIGlobals.UIFont, "");
+        healthBar = new DMGProgressBar(SampleSpriteLoader.healthBar,
+            SampleSpriteLoader.healthBar,
+            new Vector2(1, 40),
+            Color.White,
+            Color.Black,
+            1.0f,
+            theme, 
+            DMGUIGlobals.UIFont, 
+            "");
         healthBar.SetValue(1f);
         foreground = new DMGPanel(backgroundTexture, new(0, 0),
             DMGUIGlobals.UIFont,_theme,
@@ -91,7 +100,7 @@ public class SpriteMenuBarSample : DMGScene
     {
         if (ascending)
         {
-            healthBarPercentage += .1f;    
+            healthBarPercentage += .1f * speed * DMGUIGlobals.TotalSeconds;    
             if (healthBarPercentage > 1.00f)
             {
                 ascending = false;
@@ -99,7 +108,7 @@ public class SpriteMenuBarSample : DMGScene
         }
         else
         {
-            healthBarPercentage -= .1f;
+            healthBarPercentage -= .1f * speed * DMGUIGlobals.TotalSeconds;
             if (healthBarPercentage <= .01f)
             {
                 ascending = true;

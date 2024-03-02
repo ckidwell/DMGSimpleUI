@@ -69,14 +69,7 @@ public class UIManager
 
     private void SampleItemsInit()
     {
-        _spriteMainMenuSample = new SpriteMainMenuSample(_theme);
-        _spriteMenuBarSample = new SpriteMenuBarSample(_theme);
-        _menuBarSample = new MenuBarSample(_theme);
-        _mainMenuSample = new MainMenuSample(_theme);
-        
-        // Change what Classes these point to to change your UI
-        _drawActiveUiDelegate = _mainMenuSample.Draw;
-        _updateActiveUiDelegate = _mainMenuSample.Update;
+        SetUIExample(UI_SAMPLE.SPRITE_BASED);
         
         MenuBarSample.QuitGame += OnQuitGame;
         MainMenuSample.QuitGame += OnQuitGame;
@@ -88,10 +81,41 @@ public class UIManager
         MenuBarSample.ScreenTransition += OnScreenTransition;
          
         DMGUIGlobals.AddUIAlertMessage("Welcome to DMG Simple UI Demo", Color.Aqua);
-        //SetResolution(DMGUIGlobals.Bounds.X,DMGUIGlobals.Bounds.Y);
+        
         SetResolution(640,480);
     }
-    
+
+    private enum UI_SAMPLE
+    {
+        COLORED,
+        SPRITE_BASED
+    }
+    private void SetUIExample(UI_SAMPLE sample)
+    {
+        switch (sample)
+        {
+            case UI_SAMPLE.COLORED:
+                DMGUIGlobals.Theme = SampleThemes.GetDarkTheme();
+                _menuBarSample = new MenuBarSample(DMGUIGlobals.Theme);
+                _mainMenuSample = new MainMenuSample(DMGUIGlobals.Theme);
+                
+                _drawActiveUiDelegate = _mainMenuSample.Draw;
+                _updateActiveUiDelegate = _mainMenuSample.Update;
+                break;
+            case UI_SAMPLE.SPRITE_BASED:
+                DMGUIGlobals.Theme = SampleThemes.GetTexturedTheme();
+                _spriteMainMenuSample = new SpriteMainMenuSample(DMGUIGlobals.Theme);
+                _spriteMenuBarSample = new SpriteMenuBarSample(DMGUIGlobals.Theme);
+                
+                _drawActiveUiDelegate = _spriteMainMenuSample.Draw;
+                _updateActiveUiDelegate = _spriteMainMenuSample.Update;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(sample), sample, null);
+        }
+
+    }
+
     private void SetResolution(int height, int width)
     {
         _graphics.PreferredBackBufferWidth = height;

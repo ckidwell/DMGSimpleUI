@@ -11,7 +11,6 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
-    private DMGUITheme _theme;
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -24,7 +23,7 @@ public class Game1 : Game
         DMGUIGlobals.Content = Content;
         DMGUIGlobals.GraphicsDeviceManager = _graphics;
         
-        _theme = SampleThemes.GetDarkTheme();
+        DMGUIGlobals.Theme = SampleThemes.GetTexturedTheme();
         
         base.Initialize();
     }
@@ -34,7 +33,7 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         DMGUIGlobals.SpriteBatch = _spriteBatch;
         SampleSpriteLoader.LoadSampleSprites(Content);
-        _uiManager = new UIManager(this,_graphics,_theme);
+        _uiManager = new UIManager(this,_graphics,DMGUIGlobals.Theme);
     }
 
     protected override void Update(GameTime gameTime)

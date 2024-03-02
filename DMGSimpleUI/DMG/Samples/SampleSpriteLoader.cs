@@ -15,6 +15,7 @@ public class SampleSpriteLoader
     public static Texture2D playGameButton;
     public static Texture2D quitGameButton;
     public static Texture2D settingsButton;
+    public static Texture2D healthBar;
     
     public static void LoadSampleSprites(ContentManager Content)
     {
@@ -28,5 +29,6 @@ public class SampleSpriteLoader
         playGameButton = Content.Load<Texture2D>("SampleSprites/tui_playgame");
         quitGameButton = Content.Load<Texture2D>("SampleSprites/tui_quitgame");
         settingsButton = Content.Load<Texture2D>("SampleSprites/tui_settings");
+        healthBar = Content.Load<Texture2D>("SampleSprites/healthbar");
     }
 }

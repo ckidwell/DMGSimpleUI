@@ -32,6 +32,18 @@
 /processorParam:TextureFormat=Color
 /build:panelbg64x.png
 
+#begin SampleSprites/healthbar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:SampleSprites/healthbar.png
+
 #begin SampleSprites/tui_background.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -91,18 +103,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:SampleSprites/tui_menubar.png
-
-#begin SampleSprites/tui_play.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:SampleSprites/tui_play.png
 
 #begin SampleSprites/tui_play.png
 /importer:TextureImporter
