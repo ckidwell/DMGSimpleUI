@@ -4,6 +4,10 @@ A simple UI implementation for Monogame projects by DOOM METAL GAMES.
 
 This is a fairly light UI Library for Monogame. The idea is to supply very basic functionality and primitives and leave much of specifics to your game you are implementing.
 
+IMPORTANT NOTE:  
+
+_I am currently 'dog fooding' this library - meaning I am using it while I make my first Monogame. Things are likely to change as I encounter issues and needs to expand as I make the game. You are free to use the library but will probably want to branch it for your own use if you want to adopt it as there are lack of good abstractions and quality of life features that a UI that's been through the ringer several times will end up with._
+
 ### Features:
 
 1. Supports primitives of :
@@ -11,6 +15,7 @@ This is a fairly light UI Library for Monogame. The idea is to supply very basic
  - Buttons
  - Text
  - Scenes
+ - ProgressBars
 2. Themeable
 3. Transitions
    - Wipes - UP, DOWN, LEFT, RIGHT
