@@ -16,6 +16,10 @@ public class MenuBarSample : DMGScene
     private SceneTypes _sceneTypes = SceneTypes.MENU_BAR_THEMED;
     private DMGUITheme _theme;
 
+    // healthbar animations
+    private DMGProgressBar healthBar;
+    private float healthBarPercentage = 1f;
+    private bool ascending = false;
     
     public MenuBarSample(DMGUITheme theme)
     {
@@ -28,12 +32,22 @@ public class MenuBarSample : DMGScene
             _theme, 
             new Point(DMGUIGlobals.Bounds.X,36),
             "MENU");
+        healthBar = new DMGProgressBar(t, t,
+            new Vector2(1, 40),
+            Color.Red,
+            Color.DarkRed,
+            1.0f,
+            theme,
+            DMGUIGlobals.UIFont,
+            "");
+        healthBar.SetValue(1f);
         
         foreground = new DMGPanel(backgroundTexture, new(0, 0),
             DMGUIGlobals.UIFont,_theme,
             new Point(DMGUIGlobals.Bounds.X, DMGUIGlobals.Bounds.Y),"", Color.Transparent);
         
         _elements.Add(e);
+        _elements.Add(healthBar);
         
         e.AddChild(new DMGButton(t,new(65, 2),_theme ,DMGUIGlobals.UIFont,"MENU")).OnClick += OnMenu;
         e.AddChild(new DMGButton(t,new(t.Width + 65, 2),_theme ,DMGUIGlobals.UIFont,"SETTINGS")).OnClick += OnSettings;
@@ -78,8 +92,30 @@ public class MenuBarSample : DMGScene
         {
             item.Update();
         }
-    }
 
+        UpdateHealthBar();
+    }
+    private void UpdateHealthBar()
+    {
+        if (ascending)
+        {
+            healthBarPercentage += .01f;    
+            if (healthBarPercentage > 1.00f)
+            {
+                ascending = false;
+            }
+        }
+        else
+        {
+            healthBarPercentage -= .01f;
+            if (healthBarPercentage <= .01f)
+            {
+                ascending = true;
+            }
+        }
+        healthBar.SetValue(healthBarPercentage);
+
+    }
     public override void Draw()
     {
         foreach (var item in _elements)

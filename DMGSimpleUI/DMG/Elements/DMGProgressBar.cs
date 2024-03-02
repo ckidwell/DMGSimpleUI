@@ -11,6 +11,7 @@ public class DMGProgressBar : BaseUIElement
     private Rectangle worldPosition;
     private DMGUITheme _theme;
     private Color _fontCurrentColor;
+    private Color _backGroundColor;
     private Texture2D _backGroundTexture;
     
     // progress bar values
@@ -42,13 +43,38 @@ public class DMGProgressBar : BaseUIElement
         _slidingBar = new Rectangle(0, 0, t.Width, t.Height);
 
     }
+    public DMGProgressBar(Texture2D t, Texture2D background, Vector2 position, Color color, Color backgroundColor,float maximumValue, DMGUITheme theme,SpriteFont f, string buttonText = "") : base()
+    {
+        _theme = theme;
+        _color = color;
+        _shade = color;
+        _backGroundColor = backgroundColor;
+        _texture = t;
+        _backGroundTexture = background;
+        _position = position;
+        _text = buttonText;
+        _origin = new Vector2( 0,0);
+        _fontCurrentColor = _theme.fontColor;
+        
+        _rect = new Rectangle((int)_position.X, (int)_position.Y, t.Width, t.Height);
 
+        _font = f;
+        _interactable = false;
+        
+        leftTextPadding = (int) (t.Width * .1);
+        topleftTextPadding = (int) (t.Height *.34 );
+
+        _maxVal = maximumValue;
+        _currentVal = maximumValue;
+        _slidingBar = new Rectangle(0, 0, t.Width, t.Height);
+
+    }
    
     public override void Draw()
     {
         var worldPosition = _position;
         
-        DMGUIGlobals.SpriteBatch.Draw(_texture, worldPosition,null,_shade,0f,_origin,1f,SpriteEffects.None,0f);
+        DMGUIGlobals.SpriteBatch.Draw(_texture, worldPosition,null,_backGroundColor,0f,_origin,1f,SpriteEffects.None,0f);
         DMGUIGlobals.SpriteBatch.Draw(_texture, worldPosition,_slidingBar,_shade,0f,_origin,1f,SpriteEffects.None,1f);
         
         if (_text.Length > 0)
