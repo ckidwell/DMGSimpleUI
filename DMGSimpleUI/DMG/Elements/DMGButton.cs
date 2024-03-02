@@ -80,6 +80,16 @@ public class DMGButton: BaseUIElement
         {
             _childrenSpan[i].Update();
         }
+
+        if (DMGUIGlobals.Clicked)
+        {
+            var value = _rect;
+            var otherRect = DMGUIGlobals.MouseCursor;
+            var doesIntersect = value.Left < otherRect.Right && otherRect.Left < value.Right && value.Top < otherRect.Bottom && otherRect.Top < value.Bottom;
+
+        }
+        
+        
         if (DMGUIGlobals.MouseCursor.Intersects(_rect))
         {
             _shade = _theme.buttonHoverOverColor;

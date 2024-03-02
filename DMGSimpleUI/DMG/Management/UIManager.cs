@@ -125,6 +125,7 @@ public class UIManager
 
        
         CursorScaling = new Vector2(divided_width, divided_height);
+        DMGUIGlobals.CursorScaling = CursorScaling;
         
         // CursorScaling = new Vector2(_dmgCanvas.GetRenderTarget().Width / (float) GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
         //     _dmgCanvas.GetRenderTarget().Height / (float) GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
