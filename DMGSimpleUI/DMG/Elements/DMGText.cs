@@ -1,15 +1,16 @@
 using System.Runtime.InteropServices;
 using DMGSimpleUI.DMG.Management;
+using MonoGame.Extended.BitmapFonts;
 
 namespace DMGSimpleUI.DMG.Elements;
 
 public class DMGText: BaseUIElement
 {
-    public DMGText(string text,Vector2 position, SpriteFont f, Color color)
+    public DMGText(string text,Vector2 position, BitmapFont font, Color color)
     {
         _position = position;
         _text = text;
-        _font = f;
+        _font = font;
         _color = color;
     }
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using DMGSimpleUI.DMG.Elements;
 using DMGSimpleUI.DMG.Management;
 using DMGSimpleUI.DMG.Models;
+using MonoGame.Extended.BitmapFonts;
+using MonoGame.Extended.Tiled;
 
 namespace DMGSimpleUI.DMG.Samples.SpriteExample;
 
@@ -20,7 +22,6 @@ public class SpriteMainMenuSample: DMGScene
     private DMGUITheme _theme;
     private DMGPanel gameNamePanel;
 
-    
     public SpriteMainMenuSample(DMGUITheme theme)
     {
         _theme = theme;

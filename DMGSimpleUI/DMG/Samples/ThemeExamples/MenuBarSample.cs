@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DMGSimpleUI.DMG.Elements;
 using DMGSimpleUI.DMG.Management;
 using DMGSimpleUI.DMG.Models;
+using MonoGame.Extended.BitmapFonts;
 
 namespace DMGSimpleUI.DMG.Samples.ThemeExamples;
 
@@ -123,6 +124,8 @@ public class MenuBarSample : DMGScene
         {
             if(item.Visible) item.Draw();
         }
+
+        
         DMGUIGlobals.SpriteBatch.DrawString(DMGUIGlobals.UIFont, $"Mouse: {DMGUIGlobals.MouseCursor.X} , {DMGUIGlobals.MouseCursor.Y}", new Vector2(DMGUIGlobals.Bounds.X - 150,DMGUIGlobals.Bounds.Y - 25), Color.AntiqueWhite);
         DMGUIGlobals.SpriteBatch.DrawString(DMGUIGlobals.UIFont, DMGUIGlobals.GetMessage(), new Vector2( 150, DMGUIGlobals.Bounds.Y - 25), DMGUIGlobals.GetMessageColor());   
     } 

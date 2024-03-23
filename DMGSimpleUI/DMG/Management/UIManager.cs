@@ -5,13 +5,14 @@ using DMGSimpleUI.DMG.Models;
 using DMGSimpleUI.DMG.Samples;
 using DMGSimpleUI.DMG.Samples.SpriteExample;
 using DMGSimpleUI.DMG.Samples.ThemeExamples;
+using MonoGame.Extended.BitmapFonts;
 
 namespace DMGSimpleUI.DMG.Management;
 
 public class UIManager
 {
     private Texture2D ButtonTexture { get; }
-    private SpriteFont Font { get; }
+    private BitmapFont Font { get; }
     private readonly List<BaseUIElement> _elements = new();
     
     // UI Samples
@@ -40,6 +41,7 @@ public class UIManager
     // Render Target items
     private readonly DMGCanvas _dmgCanvas;
     private readonly GraphicsDeviceManager _graphics;
+    private BitmapFont _bitmapFont;
     public static Vector2 CursorScaling { get; private set; } 
 
     public UIManager(Game game, GraphicsDeviceManager graphics, DMGUITheme theme)
@@ -61,7 +63,9 @@ public class UIManager
         
         _graphics.ApplyChanges();
         ButtonTexture = DMGUIGlobals.Content.Load<Texture2D>("whitebutton128x32");
-        Font = DMGUIGlobals.Content.Load<SpriteFont>("KarenFat");
+        
+        Font = DMGUIGlobals.Content.Load<BitmapFont>("bitmapfont/dmgsimpleui");
+        
         DMGUIGlobals.UIFont = GetUISpriteFont();
 
         SampleItemsInit();
@@ -175,7 +179,7 @@ public class UIManager
     //     UIAlertMessages.Add(messageCount++, newMessage);
     //     infoMessage = newMessage;
     // }
-    public SpriteFont GetUISpriteFont()
+    public BitmapFont GetUISpriteFont()
     {
         return Font;
     }

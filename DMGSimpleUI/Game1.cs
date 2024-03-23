@@ -1,16 +1,16 @@
 ﻿using DMGSimpleUI.DMG.Management;
 using DMGSimpleUI.DMG.Models;
 using DMGSimpleUI.DMG.Samples;
+using MonoGame.Extended.BitmapFonts;
 
 namespace DMGSimpleUI;
 
 public class Game1 : Game
 {
     private UIManager _uiManager;
-    
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-
+    public static SpriteBatch SpriteBatch;
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -31,7 +31,9 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        DMGUIGlobals.SpriteBatch = _spriteBatch;
+        SpriteBatch =  _spriteBatch;
+        
+        DMGUIGlobals.SpriteBatch = SpriteBatch;
         SampleSpriteLoader.LoadSampleSprites(Content);
         _uiManager = new UIManager(this,_graphics,DMGUIGlobals.Theme);
     }
