@@ -13,7 +13,7 @@ _I am currently 'dog fooding' this library - meaning I am using it while I make 
 1. Supports primitives of :
  - Panels
  - Buttons
- - Text
+ - Text (using Bitmap fonts from Monogame Extended)
  - Scenes
  - ProgressBars
 2. Themeable
@@ -29,7 +29,9 @@ You can find some sample implementations in the project under DMGSimpleUI\DMG\Sa
 - DMGSimpleUI\DMG\Samples\SpriteExample contains two classes that use Texture2D's to implement the UI
 - DMGSimpleUI\DMG\Samples\ThemeExamples contains two classes that use Texture2D's to implement the UI
   
-In the root Sampmles folder you wlil find a SampleSceneNavigator that uses Delegates to swap themes in conjunction with the DMGTransition class, as well as a SampleTheme class that contains the samples that are demonstrated below.
+To swap the theme in use go to the UIManager class and in the SampleItemsInit() method change the SetUIExample() method to the Enum value you want to try out (SPRITE_BASED or COLORED).
+
+In the root Samples folder you will find a SampleSceneNavigator that uses Delegates to swap themes in conjunction with the DMGTransition class, as well as a SampleTheme class that contains the samples that are demonstrated below.
 
 
 Here is a GIF demonstrated a Sprite Based UI theme with a WIPE_RIGHT transition to a scene with a menu bar and then navigate back
