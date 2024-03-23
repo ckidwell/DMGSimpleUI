@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DMGSimpleUI.DMG.Management;
+using MonoGame.Extended.BitmapFonts;
 
 namespace DMGSimpleUI.DMG.Elements;
 
@@ -12,7 +13,7 @@ public class BaseUIElement
     public Rectangle _rect;
     protected Color _shade = Color.White;
     public Color _color;
-    protected SpriteFont _font;
+    protected BitmapFont _font;
     protected Vector2 _origin;
     protected int leftTextPadding;
     protected int topleftTextPadding;
@@ -28,7 +29,7 @@ public class BaseUIElement
     
     public event EventHandler OnClick;
 
-    public BaseUIElement(Texture2D t, Vector2 position,SpriteFont f, bool interactable, List<BaseUIElement> children, string buttonText = "")
+    public BaseUIElement(Texture2D t, Vector2 position,BitmapFont f, bool interactable, List<BaseUIElement> children, string buttonText = "")
     {
         _texture = t;
         _position = position;

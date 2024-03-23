@@ -2,6 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using DMGSimpleUI.DMG.Management;
 using DMGSimpleUI.DMG.Models;
+using MonoGame.Extended.BitmapFonts;
 
 namespace DMGSimpleUI.DMG.Elements;
 
@@ -19,7 +20,7 @@ public class DMGProgressBar : BaseUIElement
     private float _currentVal;
     private Rectangle _slidingBar;
     
-    public DMGProgressBar(Texture2D t, Texture2D background, Vector2 position, float maximumValue, DMGUITheme theme,SpriteFont f, string buttonText = "") : base()
+    public DMGProgressBar(Texture2D t, Texture2D background, Vector2 position, float maximumValue, DMGUITheme theme,BitmapFont f, string buttonText = "") : base()
     {
         _theme = theme;
         _color = _theme.buttonNormalColor;
@@ -43,7 +44,7 @@ public class DMGProgressBar : BaseUIElement
         _slidingBar = new Rectangle(0, 0, t.Width, t.Height);
 
     }
-    public DMGProgressBar(Texture2D t, Texture2D background, Vector2 position, Color color, Color backgroundColor,float maximumValue, DMGUITheme theme,SpriteFont f, string buttonText = "") : base()
+    public DMGProgressBar(Texture2D t, Texture2D background, Vector2 position, Color color, Color backgroundColor,float maximumValue, DMGUITheme theme,BitmapFont f, string buttonText = "") : base()
     {
         _theme = theme;
         _color = color;

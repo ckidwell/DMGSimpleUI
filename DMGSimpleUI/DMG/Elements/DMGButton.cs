@@ -2,6 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using DMGSimpleUI.DMG.Management;
 using DMGSimpleUI.DMG.Models;
+using MonoGame.Extended.BitmapFonts;
 
 namespace DMGSimpleUI.DMG.Elements;
 
@@ -12,7 +13,7 @@ public class DMGButton: BaseUIElement
     private DMGUITheme _theme;
     private Color _fontCurrentColor;
     
-    public DMGButton(Texture2D t, Vector2 position, DMGUITheme theme,SpriteFont f, string buttonText = "") : base()
+    public DMGButton(Texture2D t, Vector2 position, DMGUITheme theme,BitmapFont f, string buttonText = "") : base()
     {
         _theme = theme;
         _color = _theme.buttonNormalColor;
@@ -30,7 +31,7 @@ public class DMGButton: BaseUIElement
         leftTextPadding = (int) (t.Width * .1);
         topleftTextPadding = (int) (t.Height *.34 );
     }
-    public DMGButton(Texture2D t, Vector2 position,DMGUITheme theme, SpriteFont f,Point size, string buttonText = "") : base()
+    public DMGButton(Texture2D t, Vector2 position,DMGUITheme theme, BitmapFont f,Point size, string buttonText = "") : base()
     {
         // the clickable area for this works, but the texture is not scaled/sized to visually match
         _theme = theme;

@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using DMGSimpleUI.DMG.Models;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using MonoGame.Extended.BitmapFonts;
+using MonoGame.Extended;
 namespace DMGSimpleUI.DMG.Management;
 
 public static class DMGUIGlobals
@@ -12,7 +13,7 @@ public static class DMGUIGlobals
     public static ContentManager Content { get; set; }
     public static SpriteBatch SpriteBatch { get; set; }
     public static Point Bounds { get; set; }
-    public static SpriteFont UIFont { get; set; }
+    public static BitmapFont UIFont { get; set; }
     public static GraphicsDeviceManager GraphicsDeviceManager { get; set; }
     public static DMGUITheme Theme { get; set; }
     // Mouse Handling

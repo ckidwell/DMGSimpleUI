@@ -1,13 +1,14 @@
 using System.Runtime.InteropServices;
 using DMGSimpleUI.DMG.Management;
 using DMGSimpleUI.DMG.Models;
+using MonoGame.Extended.BitmapFonts;
 
 namespace DMGSimpleUI.DMG.Elements;
 
 public class DMGPanel : BaseUIElement
 {
 
-    public DMGPanel(Texture2D t, Vector2 position,SpriteFont f, DMGUITheme theme,  Point size, string text = "", Color? color = null)
+    public DMGPanel(Texture2D t, Vector2 position,BitmapFont f, DMGUITheme theme,  Point size, string text = "", Color? color = null)
     {
         _texture = t;
         _position = position;
