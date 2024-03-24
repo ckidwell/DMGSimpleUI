@@ -68,14 +68,13 @@ public class DMGProgressBar : BaseUIElement
         _maxVal = maximumValue;
         _currentVal = maximumValue;
         _slidingBar = new Rectangle(0, 0, t.Width, t.Height);
-
     }
    
     public override void Draw()
     {
         var worldPosition = _position;
         
-        DMGUIGlobals.SpriteBatch.Draw(_texture, worldPosition,null,_backGroundColor,0f,_origin,1f,SpriteEffects.None,0f);
+        DMGUIGlobals.SpriteBatch.Draw(_backGroundTexture, worldPosition,null,_backGroundColor,0f,_origin,1f,SpriteEffects.None,0f);
         DMGUIGlobals.SpriteBatch.Draw(_texture, worldPosition,_slidingBar,_shade,0f,_origin,1f,SpriteEffects.None,1f);
         
         if (_text.Length > 0)
